@@ -14,32 +14,32 @@ CREATE TABLE user_profile (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE book (
-	id INT AUTO_INCREMENT,
-    title VARCHAR(256) NOT NULL,
-    sub_title VARCHAR(256),
-	PRIMARY KEY (id)
-);
+-- CREATE TABLE book (
+-- 	id INT AUTO_INCREMENT,
+--     title VARCHAR(256) NOT NULL,
+--     sub_title VARCHAR(256),
+-- 	PRIMARY KEY (id)
+-- );
 
-CREATE TABLE author (
-	id INT AUTO_INCREMENT,
-	first_name VARCHAR(30) NOT NULL,
-	middle_name VARCHAR(30),
-	last_name VARCHAR(30) NOT NULL,
-	PRIMARY KEY (id)
-);
+-- CREATE TABLE author (
+-- 	id INT AUTO_INCREMENT,
+-- 	first_name VARCHAR(30) NOT NULL,
+-- 	middle_name VARCHAR(30),
+-- 	last_name VARCHAR(30) NOT NULL,
+-- 	PRIMARY KEY (id)
+-- );
 
-CREATE TABLE book_author (
-    book_id INT,
-	author_id INT,
-    PRIMARY KEY (book_id, author_id),
-	FOREIGN KEY (book_id)
-		REFERENCES book(id)
-        ON DELETE RESTRICT,
-	FOREIGN KEY (author_id)
-		REFERENCES author(id)
-        ON DELETE RESTRICT
-);
+-- CREATE TABLE book_author (
+--     book_id INT,
+-- 	author_id INT,
+--     PRIMARY KEY (book_id, author_id),
+-- 	FOREIGN KEY (book_id)
+-- 		REFERENCES book(id)
+--         ON DELETE RESTRICT,
+-- 	FOREIGN KEY (author_id)
+-- 		REFERENCES author(id)
+--         ON DELETE RESTRICT
+-- );
 
 CREATE TABLE user_book_list (
 	user_id INT,
@@ -49,10 +49,10 @@ CREATE TABLE user_book_list (
     PRIMARY KEY (user_id, book_id),
 	FOREIGN KEY (user_id)
 		REFERENCES user_profile(id)
-        ON DELETE RESTRICT,
-	FOREIGN KEY (book_id)
-		REFERENCES book(id)
-        ON DELETE RESTRICT
+        ON DELETE RESTRICT -- ,
+-- 	FOREIGN KEY (book_id)
+-- 		REFERENCES book(id)
+--         ON DELETE RESTRICT
 );
 
 CREATE TABLE user_comment (
