@@ -2,7 +2,7 @@
     <div class="container" style="text-align: right;">
         {{username}}
     </div>
-    <div class="container" style="font-size: large;">
+    <div class="container" style="font-size: 35px;">
         {{fullname}}
     </div>
     <div class="row">
@@ -23,20 +23,17 @@
             <img src="{{bookimage}}" alt="" style="width: 200px;">
             <p>{{booktitle}}</p>
             {{#if rating === 1}}
-                ★☆☆☆☆
+                <p>★☆☆☆☆</p>
             {{#else if rating === 2}}
-                ★★☆☆☆
+                <p>★★☆☆☆</p>
             {{#else if rating === 3}}
-                ★★★☆☆
+                <p>★★★☆☆</p>
             {{#else if rating === 4}}
-                ★★★★☆
+                <p>★★★★☆</p>
             {{#else if rating === 5}}
-                ★★★★★
+                <p>★★★★★</p>
             {{/if}}
         </div>
         {{/each}}
     </div>
 </div>
-    <script>
-        var review = bookslist
-    </script>
