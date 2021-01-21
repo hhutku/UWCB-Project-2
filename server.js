@@ -13,9 +13,9 @@ app.engine("handlebars", handlebars({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 const db = require("./models")
-const routes = require("./routes/routes");
+// const routes = require("./routes/routes");
 
-const socket = require("socket.io");
+// const socket = require("socket.io");
 
 db.sequelize.sync({ force: true }).then(function() {
 
