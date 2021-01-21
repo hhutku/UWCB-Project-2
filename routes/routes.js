@@ -1,43 +1,33 @@
-var path = require("path");
+const path = require("path");
+const passport = require("../config/passport");
 
-module.exports = function(app) {
-    app.get("/", function(req, res) {
-        if (!req.user) {
-            res.sendFile(path.join(__dirname, "../public/login.html"));
-        } else {
-            res.sendFile(path.join(__dirname, "../public/profile.html"));
-        }
-    });
+function isAuthenticated(req, res, next) {
+    if (req.user) {
+        return next();
+    }
 
-    app.get("/login", function(req, res) {
-        if (!req.user) {
-            res.sendFile(path.join(__dirname, "../public/login.html"));
-        } else {
-            res.sendFile(path.join(__dirname, "../public/profile.html"));
-        }
+    // return res.redirect("/");
+    res.sendFile(path.join(__dirname, "../public/login.html"));
+};
+
+module.exports = function (app) {
+    app.get("/", isAuthenticated, function (req, res) {
+        res.sendFile(path.join(__dirname, "../public/profile.html"));
     });
 
-    app.get("/signup", function(req, res) {
-        if (!req.user) {
-            res.sendFile(path.join(__dirname, "../public/signup.html"));
-        } else {
-            res.sendFile(path.join(__dirname, "../public/profile.html"));
-        }
+    app.get("/login", function (req, res) {
+        res.sendFile(path.join(__dirname, "../public/login.html"));
     });
-    
-    app.get("/profile", function(req, res) {
-        if (!req.user) {
-            res.sendFile(path.join(__dirname, "../public/login.html"));
-        } else {
-            res.sendFile(path.join(__dirname, "../public/profile.html"));
-        }
+
+    app.get("/signup", function (req, res) {
+        res.sendFile(path.join(__dirname, "../public/signup.html"));
     });
-    
-    app.get("/book", function(req, res) {
-        if (!req.user) {
-            res.sendFile(path.join(__dirname, "../public/login.html"));
-        } else {
-            res.sendFile(path.join(__dirname, "../public/book.html"));
-        }
+
+    app.get("/profile", function (req, res) {
+        res.sendFile(path.join(__dirname, "../public/profile.html"));
+    });
+
+    app.get("/book", function (req, res) {
+        res.sendFile(path.join(__dirname, "../public/book.html"));
     });
 }
