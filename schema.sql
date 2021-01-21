@@ -66,9 +66,9 @@ CREATE TABLE user_comment (
 	FOREIGN KEY (user_id)
 		REFERENCES user_profile(id)
         ON DELETE RESTRICT,
-	FOREIGN KEY (book_id)
-		REFERENCES book(id)
-        ON DELETE RESTRICT,
+--	FOREIGN KEY (book_id)
+--		REFERENCES book(id)
+--      ON DELETE RESTRICT,
 	FOREIGN KEY (parent_id)
 		REFERENCES user_comment(id)
         ON DELETE RESTRICT
