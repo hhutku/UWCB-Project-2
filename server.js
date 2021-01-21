@@ -1,4 +1,8 @@
+
+require('dotenv').config();
 const express = require("express");
+const session = require("express-session");
+const passport = require("./config/passport");
 const PORT = process.env.PORT || 8080;
 const app = express();
 
@@ -6,6 +10,9 @@ app.use(express.static("public"));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(
+    session({ secret:process.env.SESSION_SECRET, resave: true, saveUninitialized: true })
+  );
 
 const handlebars = require("express-handlebars");
 
