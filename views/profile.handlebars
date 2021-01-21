@@ -1,0 +1,39 @@
+<div>
+    <div class="container" style="text-align: right;">
+        {{username}}
+    </div>
+    <div class="container" style="font-size: 35px;">
+        {{fullname}}
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <p>Age: {{age}}</p>
+            <p>Genres: {{genres}}</p>
+        </div>
+        <div class="col-4">
+            <p>email: {{email}}</p>
+        </div>
+    </div>
+    <div class="container">
+        <p>My Books List:</p>
+    </div>
+    <div class="d-flex flex-wrap">
+        {{#each bookslist}}
+        <div style="width: 200px;">
+            <img src="{{bookimage}}" alt="" style="width: 200px;">
+            <p>{{booktitle}}</p>
+            {{#if rating === 1}}
+                <p>★☆☆☆☆</p>
+            {{#else if rating === 2}}
+                <p>★★☆☆☆</p>
+            {{#else if rating === 3}}
+                <p>★★★☆☆</p>
+            {{#else if rating === 4}}
+                <p>★★★★☆</p>
+            {{#else if rating === 5}}
+                <p>★★★★★</p>
+            {{/if}}
+        </div>
+        {{/each}}
+    </div>
+</div>
