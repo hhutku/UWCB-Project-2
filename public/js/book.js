@@ -1,4 +1,4 @@
-function getBookInfo(title) {
+function getAllBooks(title) {
 
     let queryURL = `https://www.googleapis.com/books/v1/volumes?q=${title}`
 
@@ -14,5 +14,12 @@ function getBookInfo(title) {
 $("#book-search").click(function(event) {
     event.preventDefault();
     let bookTitle = $("#book-title").val().trim();
-    getBookInfo(bookTitle);
+    getAllBooks(bookTitle);
 })
+
+function getBookById(bookId) {
+
+    let queryURL = `https://www.googleapis.com/books/v1/volumes/${bookId}`
+
+    
+}
