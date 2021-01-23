@@ -41,9 +41,9 @@ CREATE TABLE user_profile (
 --         ON DELETE RESTRICT
 -- );
 
-CREATE TABLE user_book_list (
+CREATE TABLE book_list (
 	user_id INT,
-    book_id INT,
+    book_id CHAR(12),
     compleated BOOL DEFAULT false,
     ranking FLOAT,
     PRIMARY KEY (user_id, book_id),
@@ -66,9 +66,9 @@ CREATE TABLE user_comment (
 	FOREIGN KEY (user_id)
 		REFERENCES user_profile(id)
         ON DELETE RESTRICT,
-	FOREIGN KEY (book_id)
-		REFERENCES book(id)
-        ON DELETE RESTRICT,
+--	FOREIGN KEY (book_id)
+--		REFERENCES book(id)
+--      ON DELETE RESTRICT,
 	FOREIGN KEY (parent_id)
 		REFERENCES user_comment(id)
         ON DELETE RESTRICT
