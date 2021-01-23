@@ -14,10 +14,10 @@ app.use(
     session({ secret:process.env.SESSION_SECRET, resave: true, saveUninitialized: true })
   );
 
-const handlebars = require("express-handlebars");
+// const handlebars = require("express-handlebars");
 
-app.engine("handlebars", handlebars({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
+// app.engine("handlebars", handlebars({ defaultLayout: "main" }));
+// app.set("view engine", "handlebars");
 
 const db = require("./models")
 // const routes = require("./routes/routes");

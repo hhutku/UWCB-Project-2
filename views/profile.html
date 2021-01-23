@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
     <title>Book-Club-Main-Page</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../public/css/style.css">
 </head>
 <body class="container">
     <div class="jumbotron text-center" style="margin: 0;">
@@ -32,9 +32,18 @@
         <div class="container">
             <p>My Books List:</p>
         </div>
+
+        <div>
+
+            <input type="text" id="book-title">
+            <button type="submit" id="book-search">Add a new book</button>
+
+        </div>
+        
+
         <div class="d-flex flex-wrap">
             <div style="width: 200px;">
-                <img src="TestCover.jpg" alt="" style="width: 200px;">
+                <!-- <img src="TestCover.jpg" alt="" style="width: 200px;"> -->
                 <p>Harry potter and the accident at Wendy's drivethrough</p>
                 <div id="stars">
                     <div id="star1"></div>
@@ -47,4 +56,9 @@
         </div>
     </div>
 </body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+<script src="../public/js/book.js"></script>
+
 </html>
