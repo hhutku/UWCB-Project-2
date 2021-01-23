@@ -1,7 +1,6 @@
 module.exports = function (sequelize, DataTypes) {
-
     const bookList = sequelize.define("book_list", {
-        googleBookId: {
+        google_book_id: {
             type: DataTypes.STRING,
             allowNull: false
         },

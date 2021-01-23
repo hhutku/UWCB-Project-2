@@ -1,6 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-
-    const user = sequelize.define("user_profile", {
+    const userProfile = sequelize.define("user_profile", {
         email: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -13,27 +12,31 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false
         },
-        firstName: {
+        first_name: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        lastName: {
+        last_name: {
             type: DataTypes.STRING,
             allowNull: false
         }
     });
 
-    user.associate = function (models) {
-        user.hasMany(models.book_list, {
+    userProfile.associate = function (models) {
+        userProfile.hasMany(models.book_list, {
+            onDelete: "restrict"
+        });
+
+        userProfile.hasMany(models.user_comment, {
             onDelete: "restrict"
         });
     };
 
-    user.prototype.validPassword = function (password) {
+    userProfile.prototype.validPassword = function (password) {
         return bcrypt.compareSync(password, this.password);
     };
 
-    user.addHook("beforeCreate", user => {
+    userProfile.addHook("beforeCreate", user => {
         user.password = bcrypt.hashSync(
             user.password,
             bcrypt.genSaltSync(10),
@@ -41,5 +44,5 @@ module.exports = function (sequelize, DataTypes) {
         );
     });
     
-    return user;
+    return userProfile;
 };
