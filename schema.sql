@@ -41,9 +41,9 @@ CREATE TABLE user_profile (
 --         ON DELETE RESTRICT
 -- );
 
-CREATE TABLE user_book_list (
+CREATE TABLE book_list (
 	user_id INT,
-    book_id INT,
+    book_id CHAR(12),
     compleated BOOL DEFAULT false,
     ranking FLOAT,
     PRIMARY KEY (user_id, book_id),
