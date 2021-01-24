@@ -15,6 +15,7 @@ module.exports = function (sequelize, DataTypes) {
 
     });
 
+
     // bookList.associate = function (models) {
     //     bookList.belongsTo(models.user_profile, {
     //         onDelete: "restrict",
@@ -23,6 +24,7 @@ module.exports = function (sequelize, DataTypes) {
     //         }
     //     });
     // };
+
     
     return bookList;
 };
