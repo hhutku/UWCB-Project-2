@@ -30,8 +30,10 @@ require("./routes/routes")(app);
 
 // const socket = require("socket.io");
 
-db.sequelize.sync({ force: true }).then(function() {
-    app.listen(PORT, function() {
-        console.log("Server listening on: http://localhost:" + PORT);
+db.sequelize.sync({ force: true })
+    .then(function() {
+        const server = app.listen(PORT, function() {
+            console.log("Server listening on: http://localhost:" + PORT);
+        })
+        require('./sockets')(server)
     })
-})

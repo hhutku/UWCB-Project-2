@@ -5,8 +5,19 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false
         },
         text: {
-            type: DataTypes.BLOB,
-            default: false
+            type: DataTypes.BLOB
+        },
+        displayed: {
+            type: DataTypes.BOOLEAN,
+            default: true
+        },
+        liked: {
+            type: DataTypes.INTEGER,
+            default: 0
+        },
+        disliked: {
+            type: DataTypes.INTEGER,
+            default: 0
         }
     });
 
