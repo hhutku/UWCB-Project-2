@@ -9,10 +9,6 @@ function isAuthenticated(req, res, next) {
 };
 
 module.exports = function (app) {
-    // app.get("/", isAuthenticated, function (req, res) {
-    //     res.sendFile(path.join(__dirname, "../public/profile.html"));
-    // });
-
     app.get("/", function (req, res) {
         res.sendFile(path.join(__dirname, "../public/login.html"));
     });
