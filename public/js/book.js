@@ -45,13 +45,13 @@ function getBookById(bookId) {
 }
 
 
-var self = $("#put-in-self");
+const shelf = $("#put-in-shelf");
 
-async function putInSelf() {
-    var data = await $.get("/api/user_data");
-    var UserProfileId = data.id
+async function putInShelf() {
+    const data = await $.get("/api/user_data");
+    const UserProfileId = data.id
 
-    var googleId = $("#google").data("bookId");
+    const googleId = $("#google").data("bookId");
     console.log(googleId)
     $.post("/api/bookList", {
         google_book_id: googleId,
@@ -65,10 +65,10 @@ async function putInSelf() {
 }
 
 
-self.on("click", event => {
+shelf.on("click", event => {
     event.preventDefault();
 
-    putInSelf();
+    putInShelf();
 
 });
 
