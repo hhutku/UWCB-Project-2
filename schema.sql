@@ -61,6 +61,9 @@ CREATE TABLE user_comment (
 	user_id INT,
     book_id INT,
     text BLOB NOT NULL,
+	displayed BOOLEAN NOT NULL DEFAULT TRUE,
+	liked INT NOT NULL DEFAULT 0,
+	disliked INT NOT NULL DEFAULT 0,
     parent_id INT,
 	PRIMARY KEY (id),
 	FOREIGN KEY (user_id)
