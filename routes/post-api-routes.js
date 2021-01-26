@@ -49,6 +49,23 @@ router.post("/api/signup", (req, res) => {
     }
   });
 
+  router.post("/api/booklist", (req, res) => {
+    db.book_list.create({
+      google_book_id: req.body.google_book_id,
+      completed: req.body.completed,
+      ranking: req.body.ranking,
+      UserProfileId: req.body.UserProfileId
+    
+    })
+      .then(() => {
+        res.send("ok")
+      })
+      .catch(err => {
+        res.status(401).json(err);
+      });
+  
+    });
+
 
 
 module.exports = router;
