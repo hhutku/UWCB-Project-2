@@ -24,11 +24,10 @@ module.exports = function (app) {
     });
 
     app.get("/profile",isAuthenticated,function (req, res) {
-        res.sendFile(path.join(__dirname, "../views/userProfile.html"));
+        res.sendFile(path.join(__dirname, "../public/userProfile.html"));
         });
 
     app.get("/book", function (req, res) {
         res.sendFile(path.join(__dirname, "../public/book.html"));
     });
 }
-
