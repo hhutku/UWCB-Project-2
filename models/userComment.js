@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-    const userComment = sequelize.define("user_comment", {
+    const userComment = sequelize.define("userComment", {
         googleBookId: {
             type: DataTypes.STRING,
             allowNull: false
@@ -22,7 +22,7 @@ module.exports = function (sequelize, DataTypes) {
     });
 
     // userComment.associate = function (models) {
-    //     bookList.belongsTo(models.user_profile, {
+    //     bookList.belongsTo(models.userProfile, {
     //         onDelete: "restrict",
     //         foreignKey: {
     //             allowNull: false
@@ -30,7 +30,7 @@ module.exports = function (sequelize, DataTypes) {
     //     });
 
     //     //self join
-    //     userComment.hasMany(models.user_comment, {
+    //     userComment.hasMany(models.userComment, {
     //         onDelete: "restrict"
     //     });
 

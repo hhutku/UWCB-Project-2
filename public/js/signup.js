@@ -47,7 +47,7 @@ $(document).ready(() => {
       last_name: lastName
     })
       .then(() => {
-        window.location.replace("/login");
+        window.location.replace("/profile");
         // If there's an error, handle it by throwing up a bootstrap alert
       })
       .catch(handleLoginErr);
