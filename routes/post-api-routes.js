@@ -20,7 +20,7 @@ router.post("/api/signup", (req, res) => {
     last_name: req.body.last_name
   })
     .then(() => {
-      res.send("ok")
+      res.redirect(307, "/api/login");
     })
     .catch(err => {
       res.status(401).json(err);
@@ -66,6 +66,23 @@ router.post("/api/signup", (req, res) => {
   
     });
 
+    router.post("/api/comment", (req, res) => {
+      db.user_comment.create({
+        googleBookId: req.body.googleBookId,
+        text: req.body.text,
+        displayed: req.body.displayed,
+        liked: req.body.liked,
+        disliked: req.body.disliked,
+      
+      })
+        .then(() => {
+          res.send("ok")
+        })
+        .catch(err => {
+          res.status(401).json(err);
+        });
+    
+      });
 
 
 module.exports = router;
