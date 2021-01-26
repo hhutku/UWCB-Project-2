@@ -3,11 +3,12 @@
 const express = require("express");
 const session = require("express-session");
 const passport = require("./config/passport");
+const PORT = process.env.PORT || 8080;
+const db = require("./models")
 
 const app = express();
-const PORT = process.env.PORT || 8080;
 
-const db = require("./models")
+
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -18,6 +19,12 @@ app.use(
     // session({ secret:process.env.SESSION_SECRET, resave: true, saveUninitialized: true })
     session({ secret:"asflkjd", resave: true, saveUninitialized: true })
 );
+app.use(passport.initialize());
+app.use(passport.session());
+
+const apiRoutes = require("./routes/post-api-routes");
+app.use(apiRoutes);
+
 
 require("./routes/routes")(app);
 
@@ -26,11 +33,11 @@ require("./routes/routes")(app);
 // app.engine("handlebars", handlebars({ defaultLayout: "main" }));
 // app.set("view engine", "handlebars");
 
-// const routes = require("./routes/routes");
+const routes = require("./routes/routes");
 
 // const socket = require("socket.io");
 
-db.sequelize.sync({ force: true }).then(function() {
+db.sequelize.sync().then(function() {
     app.listen(PORT, function() {
         console.log("Server listening on: http://localhost:" + PORT);
     })

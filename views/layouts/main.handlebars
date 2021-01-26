@@ -1,23 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
-    <title>Book-Club-Main-Page</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Book-Club-Main-Page</title>
 
-<body class="container">
-    <div class="jumbotron text-center">
-        <h1>Book Club!</h1>
-        <p>Find and organize your favorite books!</p>
-    </div>
-    <div>
-        {{{body}}}
-    </div>
-</body>
+        <!-- STYLES -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        
+        <!-- SCRIPTS -->
+        <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.1/socket.io.js" integrity="sha512-vGcPDqyonHb0c11UofnOKdSAt5zYRpKI4ow+v6hat4i96b7nHSn8PQyk0sT5L9RECyksp+SztCPP6bqeeGaRKg==" crossorigin="anonymous"></script>
+    </head>
 
-{{!-- <script src="../../public/js/book.js"></script> --}}
+    <body class="container">
+        <div class="jumbotron text-center">
+            <h1>Book Club!</h1>
+            <p>Find and organize your favorite books!</p>
+        </div>
+        <div>
+            {{{body}}}
+        </div>
+    </body>
+
+    {{!-- <script src="../../public/js/book.js"></script> --}}
+    {{!-- <script src="../../public/js/comments.js"></script> --}}
 
 </html>
