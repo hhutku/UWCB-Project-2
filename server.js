@@ -16,7 +16,6 @@ app.use(express.json());
 app.use(express.static("public"));
 
 app.use(
-    // session({ secret:process.env.SESSION_SECRET, resave: true, saveUninitialized: true })
     session({ secret:"asflkjd", resave: true, saveUninitialized: true })
 );
 app.use(passport.initialize());

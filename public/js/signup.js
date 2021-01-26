@@ -40,12 +40,7 @@ $(document).ready(() => {
   // Does a post to the signup route. If successful, we are redirected to the members page
   // Otherwise we log any errors
   function signUpUser(email, password, firstName, lastName) {
-    $.post("/api/signup", {
-      email: email,
-      password: password,
-      first_name: firstName,
-      last_name: lastName
-    })
+    $.post("/api/signup", { email, password, firstName, lastName })
       .then(() => {
         window.location.replace("/profile");
         // If there's an error, handle it by throwing up a bootstrap alert
@@ -54,7 +49,7 @@ $(document).ready(() => {
   }
 
   function handleLoginErr() {
-    $("#alert .msg").text("There is sthing wrong");
+    $("#alert .msg").text("There is something wrong");
     $("#alert").fadeIn(500);
   }
 });

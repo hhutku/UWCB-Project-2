@@ -20,7 +20,7 @@ function displayComment(data) {
         const editButton = $(`<button class='edit-button comment-option'>✏️ Edit</button>`).appendTo(optionsDisplay)
         const deleteButton = $(`<button class='delete-button comment-option'>❌ Delete</button>`).appendTo(optionsDisplay)
     }
-    const replayInput = $(`<div class='reply_input'></div>`).appendTo(box)
+    const replayInput = $(`<div class='reply-input'></div>`).appendTo(box)
     const subcommentList = $(`<div class='subcomment-list'></div>`).appendTo(box)
 }
 
@@ -40,6 +40,14 @@ function removeComment(commentID) {
     $(`#comment-${commentID} .message-display`)
         .text(notDisplayedMessage)
         .addClass('removed')
+}
+
+function displayReplayInput(commentID) {
+    $(`#comment-${commentID} .reply-input`).show().focus()
+}
+
+function submitReplay(commentID) {
+    $(`#comment-${commentID} .reply-input`).show()
 }
 
 function init(userID, bookID) {

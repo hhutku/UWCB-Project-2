@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <title>Book-Club-Main-Page</title>
+    <link rel="stylesheet" href="../public/css/style.css">
+
+    <style>
+        #bookshelf {
+            margin-top: 15px;
+        }
+        #book-list {
+            display: flex;
+        }
+
+        #bookshelf #info {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .book-card {
+            display: flex;
+            flex-direction: column;
+            width: 150px;
+            padding: 8px;
+            box-sizing: content-box;
+            background-color: #eee;
+            border-radius: 8px;
+            margin: 10px;
+            align-items: flex-start;
+        }
+        .book-card h1 {
+            font-size: 22px;
+        }
+        .book-card h2 {
+            font-size: 12px;
+        }
+        .book-card em {
+            font-size: 12px;
+        }
+        .book-card em::before {
+            content: '-- ';
+        }
+        .book-card img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/logout">
+                Logout
+            </a>
+        </div>
+    </div>
+</nav>
+
+<body class="container">
+    <header class="jumbotron text-center" style="margin: 0;">
+        <h1>Book Club!</h1>
+        <p>Find and organize your favorite books!</p>
+    </header>
+
+    <main style="width: 1200px;">
+        <h2>Makai Post</h2>
+        <div>post.makai@gmail.com</div>
+
+        <div id='bookshelf'>
+            <div id='info'>
+                <h3>Bookshelf</h3>
+                <span>
+                    <input type="search" name="book-lookup" id="book-title">
+                    <button type="submit" id='book-search'>🔎</button>
+                </span>
+            </div>
+            <div id='book-list'>
+                <span class='book-card' data-book-id='R6E0AAAAMAAJ'>
+                    <h1>Flatland</h1>
+                    <h2>A Romance of Many Dimensions</h2>
+                    <img src="http://books.google.com/books/content?id=R6E0AAAAMAAJ&printsec=frontcover&img=1&zoom=5&edge=curl&imgtk=AFLRE73NSZ8JbPT3hFk04_9MvGF3hQPSIYB2SIp0uinCRjhL08s1vtz9DxWFk_rULr1wilHrVNtT0DgAN5m0PDXAF5fc25-2wklv5bPw9p_IeK0_TPsskcfU5kUG-smPETXRfT5HLprB&source=gbs_api" alt="">
+                    <em>Edwin Abbott Abbott</em>
+                </span>
+
+                <span class='book-card' data-book-id='kotPYEqx7kMC'>
+                    <h1>1984</h1>
+                    <h2></h2>
+                    <img src="http://books.google.com/books/content?id=kotPYEqx7kMC&printsec=frontcover&img=1&zoom=5&edge=curl&imgtk=AFLRE70m37UY0UtMRRDfzoU6ZAKgGZSkn_6-HjJZA38Q14nricTFTSF8CqZM2nb3kXshx9-YkCenG_X-GYcqZin2evqCmWkP8lWYSlOKtEeIdiqYVWVNez8p9fU-_DQVTraPxI5C60aY&source=gbs_api" alt="">
+                    <em>George Orwell</em>
+                </span>
+            </div>
+        </div>
+
+        <!-- <div>
+            <div class="container"
+                style="text-align: right; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+
+            </div>
+            <div class="container"
+                style="font-size: 30px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <p
+                        style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+                    </p>
+                    <p
+                        style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+                    </p>
+                </div>
+                <div class="col-4">
+                    <p></p>
+                </div>
+            </div>
+            <div class="container">
+                <p></p>
+            </div>
+
+            <div>
+                <input type="text" id="book-title">
+                <button type="submit" id="book-search">Add a new book</button>
+
+            </div>
+            <div>
+                <h2>Description</h2>
+                <p id="description"></p>
+                <button type="submit" id="put-in-shelf">Put in my bookshelf</button>
+                <button type="submit" id="my-book-shelf">My bookshelf</button>
+            </div>
+
+            <p id="google"></p>
+
+
+            <div class="d-flex flex-wrap">
+                <div style="width: 200px;">
+                    <p></p>
+                    <div id="stars">
+                        <div id="star1"></div>
+                        <div id="star2"></div>
+                        <div id="star3"></div>
+                        <div id="star4"></div>
+                        <div id="star5"></div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </main>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+<script src="js/book.js"></script>
+
+</html>

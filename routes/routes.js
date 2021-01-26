@@ -12,14 +12,14 @@ module.exports = function (app) {
     app.get("/", function (req, res) {
         if (req.user) {
             res.redirect("/profile");
-          }
+        }
         res.sendFile(path.join(__dirname, "../public/login.html"));
     });
 
     app.get("/signup", function (req, res) {
         if (req.user) {
             res.redirect("/profile");
-          }
+        }
         res.sendFile(path.join(__dirname, "../public/signup.html"));
     });
 
