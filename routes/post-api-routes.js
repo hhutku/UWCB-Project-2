@@ -13,7 +13,7 @@ router.post("/api/login", passport.authenticate("local"), (req, res) => {
 
 
 router.post("/api/signup", (req, res) => {
-  db.UserProfile.create({
+  db.userProfile.create({
     email: req.body.email,
     password: req.body.password,
     first_name: req.body.first_name,
@@ -50,11 +50,11 @@ router.post("/api/signup", (req, res) => {
   });
 
   router.post("/api/booklist", (req, res) => {
-    db.book_list.create({
+    db.bookList.create({
       google_book_id: req.body.google_book_id,
       completed: req.body.completed,
       ranking: req.body.ranking,
-      UserProfileId: req.body.UserProfileId
+      userProfileId: req.body.userProfileId
     
     })
       .then(() => {

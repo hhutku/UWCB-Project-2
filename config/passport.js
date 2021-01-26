@@ -12,7 +12,7 @@ passport.use(
     },
     (email, password, done) => {
   
-      db.UserProfile.findOne({
+      db.userProfile.findOne({
         where: {
           email: email
         }
