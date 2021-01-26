@@ -23,3 +23,15 @@ function getBookById(bookId) {
 
     
 }
+
+function addBookToList() {
+
+}
+
+function displayBookSearch() {
+
+}
+
+function displayBookList() {
+
+}
