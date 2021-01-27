@@ -1,25 +1,36 @@
 module.exports = function (sequelize, DataTypes) {
-    const userComment = sequelize.define("user_comment", {
+    const userComment = sequelize.define("userComment", {
         googleBookId: {
             type: DataTypes.STRING,
             allowNull: false
         },
         text: {
-            type: DataTypes.BLOB,
-            default: false
+            type: DataTypes.BLOB
+        },
+        displayed: {
+            type: DataTypes.BOOLEAN,
+            default: true
+        },
+        liked: {
+            type: DataTypes.INTEGER,
+            default: 0
+        },
+        disliked: {
+            type: DataTypes.INTEGER,
+            default: 0
         }
     });
 
     // userComment.associate = function (models) {
-    //     bookList.belongsTo(models.user_profile, {
+    //     bookList.belongsTo(models.userProfile, {
     //         onDelete: "restrict",
     //         foreignKey: {
     //             allowNull: false
     //         }
     //     });
-        
+
     //     //self join
-    //     userComment.hasMany(models.user_comment, {
+    //     userComment.hasMany(models.userComment, {
     //         onDelete: "restrict"
     //     });
 
@@ -31,7 +42,5 @@ module.exports = function (sequelize, DataTypes) {
     //     });
     // };
 
-
-    
     return userComment;
 };

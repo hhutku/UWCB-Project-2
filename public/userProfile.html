@@ -8,6 +8,7 @@
     <title>Book-Club-Main-Page</title>
     <link rel="stylesheet" href="../public/css/style.css">
 </head>
+
 <body class="container">
 
     <nav class="navbar navbar-default">
@@ -24,6 +25,7 @@
         <h1>Book Club!</h1>
         <p>Find and organize your favorite books!</p>
     </div>
+
     <div>
         <div class="container" style="text-align: right; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
             test
@@ -42,17 +44,32 @@
         </div>
         <div class="container">
             <p>My Books List:</p>
+<!-- Not sure about this h1 id code here -->
+    <h1 id="welcome"></h1>
+
+
         </div>
 
         <div>
             <input type="text" id="book-title">
             <button type="submit" id="book-search">Add a new book</button>
+
         </div>
+        <div>
+            <h2>Description</h2>
+            <p id="description"></p>
+            <button type="submit" id="put-in-shelf">Put in my bookshelf</button>
+            <button type="submit" id="my-book-shelf">My bookshelf</button>
+        </div>
+
+        <p id="google" ></p>
 
         <div class="d-flex flex-wrap">
             <div style="width: 200px;">
                 <!-- <img src="TestCover.jpg" alt="" style="width: 200px;"> -->
-                <p>Harry potter and the accident at Wendy's drivethrough</p>
+
+                <p></p>
+
                 <div id="stars">
                     <div id="star1"></div>
                     <div id="star2"></div>
@@ -66,9 +83,11 @@
 </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
 <script src="../js/book.js"></script>
+
 
 </html>
