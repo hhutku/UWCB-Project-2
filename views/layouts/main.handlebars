@@ -12,12 +12,63 @@
     <div class="jumbotron text-center">
         <h1>Book Club!</h1>
         <p>Find and organize your favorite books!</p>
+        <!-- MODAL TRIGGER BUTTON START -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Booksearch!</button>
+        <!-- END MODAL TRIGGER BUTTON -->
     </div>
+
+<!-- MODAL START -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        
+        <form class="mx-auto">
+          <input type="text" id="book-title" placeholder="Enter a Title of a Book!" size="75">
+          <button type="submit" id="book-search">Search</button>
+        </form>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="card flex-row">
+          <img class="card-header border-0" src="https://via.placeholder.com/200" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Harry Potter: The Complete Collection (1-7)</h5>
+            <h6><!--Subtitle of the Book--></h6>
+            <h7>J.K. Rowling</h7>
+            <p class="card-text">All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.</p>
+            <a href="#" class="btn btn-primary" id="put-in-shelf" data-bookId="f280CwAAQBAJ">Add To Bookshelf</a>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END MODAL -->
+    
     <div>
         {{{body}}}
     </div>
+
 </body>
 
-{{!-- <script src="../../public/js/book.js"></script> --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+<script type="text/javascript" src="js/book.js"></script>
+<script type="text/javascript" src="js/signup.js"></script>
+<script type="text/javascript" src="js/login.js"></script>
+
 
 </html>

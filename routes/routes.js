@@ -14,21 +14,23 @@ module.exports = function (app) {
     // });
 
     app.get("/login", function (req, res) {
-
-        res.sendFile(path.join(__dirname, "../public/login.html"));
+        res.render("login");
+        // res.sendFile(path.join(__dirname, "../public/login.html"));
     });
 
     app.get("/", function (req, res) {
-
-        res.sendFile(path.join(__dirname, "../public/signup.html"));
+        res.render("signUp");
+        // res.sendFile(path.join(__dirname, "../public/signup.html"));
     });
 
     app.get("/profile",isAuthenticated,function (req, res) {
-        res.sendFile(path.join(__dirname, "../views/userProfile.html"));
-        });
+        res.render("userProfile");
+        // res.sendFile(path.join(__dirname, "../views/userProfile.html"));
+    });
 
     app.get("/book", function (req, res) {
-        res.sendFile(path.join(__dirname, "../public/book.html"));
+        res.render("bookPage");
+        // res.sendFile(path.join(__dirname, "../public/book.html"));
     });
 }
 

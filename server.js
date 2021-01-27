@@ -28,10 +28,11 @@ app.use(apiRoutes);
 
 require("./routes/routes")(app);
 
-// const handlebars = require("express-handlebars");
-
-// app.engine("handlebars", handlebars({ defaultLayout: "main" }));
-// app.set("view engine", "handlebars");
+//handlebars stuff start
+const handlebars = require("express-handlebars");
+app.engine("handlebars", handlebars({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+//end handlebars stuff
 
 const routes = require("./routes/routes");
 
