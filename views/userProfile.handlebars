@@ -24,17 +24,59 @@
             <img src="{{bookimage}}" alt="" style="width: 200px;">
             <p>{{booktitle}}</p>
             {{#if rating === 1}}
-                <p>★☆☆☆☆</p>
+            <p>★☆☆☆☆</p>
             {{#else if rating === 2}}
-                <p>★★☆☆☆</p>
+            <p>★★☆☆☆</p>
             {{#else if rating === 3}}
-                <p>★★★☆☆</p>
+            <p>★★★☆☆</p>
             {{#else if rating === 4}}
-                <p>★★★★☆</p>
+            <p>★★★★☆</p>
             {{#else if rating === 5}}
-                <p>★★★★★</p>
+            <p>★★★★★</p>
             {{/if}}
         </div>
         {{/each}} --}}
     </div>
 </div>
+
+<div>
+    <!-- MODAL TRIGGER BUTTON START -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Booksearch!</button>
+    <!-- END MODAL TRIGGER BUTTON -->
+</div>
+
+<!-- MODAL START -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+
+                <form class="mx-auto">
+                    <input type="text" id="book-title" placeholder="Enter a Title of a Book!" size="75">
+                    <button type="submit" id="book-search">Search</button>
+                </form>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+                
+                {{> booksearch}}
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- END MODAL -->
