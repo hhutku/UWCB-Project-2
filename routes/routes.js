@@ -5,7 +5,9 @@ function isAuthenticated(req, res, next) {
     if (req.user) {
         return next();
     }
-      res.sendFile(path.join(__dirname, "../public/login.html"));
+    res.render("login");
+
+    // res.sendFile(path.join(__dirname, "../public/login.html"));
 };
 
 module.exports = function (app) {
