@@ -22,8 +22,12 @@ module.exports = function (app) {
     });
 
     app.get("/", function (req, res) {
-        res.render("signUp");
+        res.render("login");
         // res.sendFile(path.join(__dirname, "../public/signup.html"));
+    });
+
+    app.get("/signup", function (req, res) {
+        res.render("signUp");
     });
 
     app.get("/login", function (req, res) {
