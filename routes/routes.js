@@ -22,15 +22,20 @@ module.exports = function (app) {
     });
 
     app.get("/", function (req, res) {
-        res.render("signUp");
+        res.render("login");
         // res.sendFile(path.join(__dirname, "../public/signup.html"));
+    });
+
+    app.get("/signup", function (req, res) {
+        res.render("signUp");
     });
 
     app.get("/login", function (req, res) {
         res.sendFile(path.join(__dirname, "../public/login.html"));
     });
 
-    app.get("/profile",isAuthenticated,function (req, res) {
+    app.get("/profile",function (req, res) {
+    // app.get("/profile",isAuthenticated,function (req, res) {
 
         res.render("userProfile");
         // res.sendFile(path.join(__dirname, "../views/userProfile.html"));

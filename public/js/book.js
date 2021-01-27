@@ -1,7 +1,7 @@
 
 
 $.get("/api/user_data").then(data => {
-    const text ="id " +data.id +" " +" email : " + data.email + " name :"+data.first_name;
+    const text = "id " + data.id + " " + " email : " + data.email + " name :" + data.first_name;
     $("#welcome").text(text);
 
 })
@@ -16,11 +16,24 @@ function getAllBooks(title) {
         .then(function (res) {
             console.log(res);
 
-            var bookId = res.items[0].id;
+            const bookId = res.items[0].id;
             $("#google").data("bookId", bookId);
 
-            console.log(bookId)
-            getBookById(bookId)
+            console.log(res.items[0].volumeInfo.imageLinks.smallThumbnail)
+            console.log(res.items[0].volumeInfo.title)
+            console.log(res.items[0].volumeInfo.authors[0])
+            console.log(res.items[0].volumeInfo.description)
+
+            for (i = 0; i < res.length; i++) {
+                $("#img" + i).attr("src", res.items[i].volumeInfo.imageLinks.smallThumbnail);
+                $("#title" + i).text(res.items[i].volumeInfo.title);
+                $("#author" + i).text(res.items[i].volumeInfo.authors[0]);
+                $("#description" + i).text(res.items[i].volumeInfo.description);
+                $("googleID" + i).attr("data-bookId", bookId)
+            }
+
+            console.log(bookId);
+            getBookById(bookId);
 
         })
 }
@@ -29,6 +42,7 @@ $("#book-search").click(function (event) {
     event.preventDefault();
     let bookTitle = $("#book-title").val().trim();
     getAllBooks(bookTitle);
+    $(".book-results").removeClass("hidden");
 })
 
 
