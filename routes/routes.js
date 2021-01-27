@@ -5,22 +5,25 @@ function isAuthenticated(req, res, next) {
     if (req.user) {
         return next();
     }
-    res.sendFile(path.join(__dirname, "../public/login.html"));
+
+    res.render("login");
+
+    // res.sendFile(path.join(__dirname, "../public/login.html"));
 };
 
 module.exports = function (app) {
-    app.get("/", function (req, res) {
-        if (req.user) {
-            res.redirect("/profile");
-          }
-        res.sendFile(path.join(__dirname, "../public/login.html"));
+    // app.get("/", isAuthenticated, function (req, res) {
+    //     res.sendFile(path.join(__dirname, "../public/profile.html"));
+    // });
+
+    app.get("/login", function (req, res) {
+        res.render("login");
+        // res.sendFile(path.join(__dirname, "../public/login.html"));
     });
 
-    app.get("/signup", function (req, res) {
-        if (req.user) {
-            res.redirect("/profile");
-          }
-        res.sendFile(path.join(__dirname, "../public/signup.html"));
+    app.get("/", function (req, res) {
+        res.render("signUp");
+        // res.sendFile(path.join(__dirname, "../public/signup.html"));
     });
 
     app.get("/login", function (req, res) {
@@ -28,10 +31,13 @@ module.exports = function (app) {
     });
 
     app.get("/profile",isAuthenticated,function (req, res) {
-        res.sendFile(path.join(__dirname, "../public/userProfile.html"));
-        });
+
+        res.render("userProfile");
+        // res.sendFile(path.join(__dirname, "../views/userProfile.html"));
+    });
 
     app.get("/book", function (req, res) {
-        res.sendFile(path.join(__dirname, "../public/book.html"));
+        res.render("bookPage");
+        // res.sendFile(path.join(__dirname, "../public/book.html"));
     });
 }
