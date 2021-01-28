@@ -24,7 +24,22 @@ function getAllBooks(title) {
             console.log(res.items[0].volumeInfo.authors[0])
             console.log(res.items[0].volumeInfo.description)
 
-            for (i = 0; i < res.length; i++) {
+            for (i = 0; i < 5; i++) {
+
+                let googleId = res.items[i].id;
+
+                const html = `<div class="card flex-row">
+                    <img class="card-header border-0 book-image" src="https://via.placeholder.com/200" alt="Card image cap" id="img${i}">
+                    <div class="card-body">
+                        <h5 class="card-title title-name" id="title${i}"></h5>
+                        <h6 class="book-subtitle" id="subtitle${i}"></h6>
+                        <h7 class="author" id="author${i}"></h7>
+                        <p class="card-text book-description" id="description${i}"></p>
+                        <button class="btn btn-primary" id="put-in-shelf" data-googleId=${googleId}>Add To My Bookshelf</button>
+                    </div>
+                    </div>`
+
+                $("#book-results").append(html);                
                 $("#img" + i).attr("src", res.items[i].volumeInfo.imageLinks.smallThumbnail);
                 $("#title" + i).text(res.items[i].volumeInfo.title);
                 $("#author" + i).text(res.items[i].volumeInfo.authors[0]);
@@ -79,10 +94,13 @@ async function putInShelf() {
 }
 
 
-shelf.on("click", event => {
+$("#put-in-shelf").click(function (event) {
+
     event.preventDefault();
 
-    putInShelf();
+    // putInShelf(googleId);
+
+    console.log("click")
 
 });
 
