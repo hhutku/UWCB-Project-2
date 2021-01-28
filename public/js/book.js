@@ -30,13 +30,13 @@ function getAllBooks(title) {
 
                 const html = `<div class="card flex-row">
                     <img class="card-header border-0 book-image" src="https://via.placeholder.com/200" alt="Card image cap" id="img${i}">
-                    <div class="card-body">
-                        <h5 class="card-title title-name" id="title${i}"></h5>
-                        <h6 class="book-subtitle" id="subtitle${i}"></h6>
-                        <h7 class="author" id="author${i}"></h7>
-                        <p class="card-text book-description" id="description${i}"></p>
-                        <button class="btn btn-primary" id="put-in-shelf" data-googleId=${googleId}>Add To My Bookshelf</button>
-                    </div>
+                        <div class="card-body">
+                            <h5 class="card-title title-name" id="title${i}"></h5>
+                            <h6 class="book-subtitle" id="subtitle${i}"></h6>
+                            <h7 class="author" id="author${i}"></h7>
+                            <p class="card-text book-description" id="description${i}"></p>
+                            <button class="btn btn-primary put-in-shelf" data-googleId=${googleId}>Add To My Bookshelf</button>
+                        </div>
                     </div>`
 
                 $("#book-results").append(html);                
@@ -57,7 +57,7 @@ $("#book-search").click(function (event) {
     event.preventDefault();
     let bookTitle = $("#book-title").val().trim();
     getAllBooks(bookTitle);
-    $(".book-results").removeClass("hidden");
+    $("#book-results").removeClass("hidden");
 })
 
 
@@ -74,13 +74,13 @@ function getBookById(bookId) {
 }
 
 
-const shelf = $("#put-in-shelf");
+const shelf = $(".put-in-shelf");
 
 async function putInShelf() {
     const data = await $.get("/api/user_data");
     const UserProfileId = data.id
 
-    const googleId = $("#google").data("bookId");
+    const googleId = $(".put-in-shelf").data("googleId");
     console.log(googleId)
     $.post("/api/bookList", {
         google_book_id: googleId,
@@ -93,15 +93,12 @@ async function putInShelf() {
         })
 }
 
-
-$("#put-in-shelf").click(function (event) {
+$("#book-results").on("click", ".put-in-shelf", function (event) {
 
     event.preventDefault();
 
-    // putInShelf(googleId);
+    putInShelf();
 
     console.log("click")
 
 });
-
-
