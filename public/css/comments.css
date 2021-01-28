@@ -1,0 +1,65 @@
+#comment-root {
+	max-width: 960px;
+	margin: auto;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.comment-box:not(#comment-root) {
+	margin-top: 10px;
+	margin-left: 15px;
+	border-left: 3px solid slategray;
+	padding: 5px;
+	padding-right: 0;
+}
+.comment-box .time-display {
+	opacity: 0.5;
+	padding-left: 15px;
+	font-size: 0.75rem;
+	position: relative;
+}
+.comment-box .time-display:hover::after {
+	content: attr(data-timestamp);
+	display: block;
+	position: absolute;
+	top: 0;
+	right: -10px;
+	transform: translateX(100%);
+	white-space: nowrap;
+}
+.comment-box .name-display {
+	font-size: 0.75rem;
+}
+.comment-box .message-display {
+	padding: 5px 0;
+}
+.comment-box .message-display.removed {
+	color: gray;
+	font-size: 0.75rem;
+}
+.comment-box button {
+	border: none;
+	padding: 2px 7.5px;
+	margin: 0 2.5px;
+	cursor: pointer;
+	outline: none;
+	border-radius: 5px;
+	background-color: transparent;
+}
+.comment-box .options-box button {
+	font-size: 0.7rem;
+}
+.comment-box button:hover,
+.comment-box button:focus {
+	background-color: #ddd;
+}
+.comment-box button:active {
+	background-color: #ccc;
+}
+.comment-box textarea {
+	min-height: 30px;
+	width: 100%;
+	resize: vertical;
+}
+.comment-box .input-button-box {
+	display: flex;
+	flex-direction: row-reverse;
+}
