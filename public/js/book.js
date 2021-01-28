@@ -35,7 +35,7 @@ function getAllBooks(title) {
                         <h6 class="book-subtitle" id="subtitle${i}"></h6>
                         <h7 class="author" id="author${i}"></h7>
                         <p class="card-text book-description" id="description${i}"></p>
-                        <button class="btn btn-primary" id="put-in-shelf" data-googleId=${googleId}>Add To My Bookshelf</button>
+                        <button class="btn btn-primary put-in-shelf" data-googleId=${googleId}>Add To My Bookshelf</button>
                     </div>
                     </div>`
 
@@ -57,7 +57,7 @@ $("#book-search").click(function (event) {
     event.preventDefault();
     let bookTitle = $("#book-title").val().trim();
     getAllBooks(bookTitle);
-    $(".book-results").removeClass("hidden");
+    $("#book-results").removeClass("hidden");
 })
 
 
@@ -74,19 +74,16 @@ function getBookById(bookId) {
 }
 
 
-const shelf = $("#put-in-shelf");
+const shelf = $(".put-in-shelf");
 
-async function putInShelf() {
+async function putInShelf(googleId) {
     const data = await $.get("/api/user_data");
     const UserProfileId = data.id
 
-    const googleId = $("#google").data("bookId");
     console.log(googleId)
     $.post("/api/bookList", {
         google_book_id: googleId,
-        completed: true,
-        ranking: 10,
-        UserProfileId: UserProfileId,
+        UserProfileId: UserProfileId
     })
         .then(() => {
             console.log("ok")
@@ -94,14 +91,14 @@ async function putInShelf() {
 }
 
 
-$("#put-in-shelf").click(function (event) {
+$("#book-results").on("click", ".put-in-shelf", function (event) {
 
     event.preventDefault();
 
-    // putInShelf(googleId);
+    const googleId = $(this).attr("data-googleId");
+
+    putInShelf(googleId);
 
     console.log("click")
 
 });
-
-
