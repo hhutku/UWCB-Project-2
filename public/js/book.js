@@ -111,6 +111,7 @@ $("#book-results").on("click", ".put-in-shelf", function (event) {
 
 });
 
+// click event for refresh button on profile page
 $("#dust-off-shelf").on("click", function(event){
     event.preventDefault();
     console.log("Dusting Bookshelf...");
