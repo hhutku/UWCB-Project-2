@@ -1,7 +1,7 @@
 
 
 $.get("/api/user_data").then(data => {
-    const text ="id " +data.id +" " +" email : " + data.email + " name :"+data.first_name;
+    const text = "id " + data.id + " " + " email : " + data.email + " name :" + data.first_name;
     $("#welcome").text(text);
 
 })
@@ -16,11 +16,41 @@ function getAllBooks(title) {
         .then(function (res) {
             console.log(res);
 
-            var bookId = res.items[0].id;
+            const bookId = res.items[0].id;
             $("#google").data("bookId", bookId);
 
-            console.log(bookId)
-            getBookById(bookId)
+            console.log(res.items[0].volumeInfo.imageLinks.smallThumbnail)
+            console.log(res.items[0].volumeInfo.title)
+            console.log(res.items[0].volumeInfo.authors[0])
+            console.log(res.items[0].volumeInfo.description)
+
+            for (i = 0; i < 5; i++) {
+
+                let googleId = res.items[i].id;
+
+                const html = `<div class="card flex-row">
+                    <img class="card-header border-0 book-image" src="https://via.placeholder.com/200" alt="Card image cap" id="img${i}">
+
+                    <div class="card-body">
+                        <h5 class="card-title title-name" id="title${i}"></h5>
+                        <h6 class="book-subtitle" id="subtitle${i}"></h6>
+                        <h7 class="author" id="author${i}"></h7>
+                        <p class="card-text book-description" id="description${i}"></p>
+                        <button class="btn btn-primary put-in-shelf" data-googleId=${googleId}>Add To My Bookshelf</button>
+                    </div>
+
+                    </div>`
+
+                $("#book-results").append(html);                
+                $("#img" + i).attr("src", res.items[i].volumeInfo.imageLinks.smallThumbnail);
+                $("#title" + i).text(res.items[i].volumeInfo.title);
+                $("#author" + i).text(res.items[i].volumeInfo.authors[0]);
+                $("#description" + i).text(res.items[i].volumeInfo.description);
+                $("googleID" + i).attr("data-bookId", bookId)
+            }
+
+            console.log(bookId);
+            getBookById(bookId);
 
         })
 }
@@ -29,6 +59,7 @@ $("#book-search").click(function (event) {
     event.preventDefault();
     let bookTitle = $("#book-title").val().trim();
     getAllBooks(bookTitle);
+    $("#book-results").removeClass("hidden");
 })
 
 
@@ -45,31 +76,31 @@ function getBookById(bookId) {
 }
 
 
-const shelf = $("#put-in-shelf");
+const shelf = $(".put-in-shelf");
 
-async function putInShelf() {
+async function putInShelf(googleId) {
     const data = await $.get("/api/user_data");
     const UserProfileId = data.id
 
-    const googleId = $("#google").data("bookId");
     console.log(googleId)
     $.post("/api/bookList", {
         google_book_id: googleId,
-        completed: true,
-        ranking: 10,
-        UserProfileId: UserProfileId,
+        UserProfileId: UserProfileId
     })
         .then(() => {
             console.log("ok")
         })
 }
 
+$("#book-results").on("click", ".put-in-shelf", function (event) {
 
-shelf.on("click", event => {
     event.preventDefault();
 
-    putInShelf();
+    const googleId = $(this).attr("data-googleId");
+
+    putInShelf(googleId);
+
+
+    console.log("click")
 
 });
-
-
