@@ -34,8 +34,8 @@ module.exports = function (app) {
         res.sendFile(path.join(__dirname, "../public/login.html"));
     });
 
-    app.get("/profile",function (req, res) {
-    // app.get("/profile",isAuthenticated,function (req, res) {
+    
+    app.get("/profile",isAuthenticated,function (req, res) {
 
         res.render("userProfile");
         // res.sendFile(path.join(__dirname, "../views/userProfile.html"));

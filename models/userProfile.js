@@ -33,6 +33,13 @@ module.exports = function (sequelize, DataTypes) {
     //     });
     // };
 
+    userProfile.associate = function(models) {
+        
+        userProfile.hasMany(models.bookList, {
+          onDelete: "cascade"
+        });
+    }
+
     userProfile.prototype.validPassword = function (password) {
         return bcrypt.compareSync(password, this.password);
     };

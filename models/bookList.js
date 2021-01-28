@@ -14,14 +14,15 @@ module.exports = function (sequelize, DataTypes) {
         }
     });
 
-    // bookList.associate = function (models) {
-    //     bookList.belongsTo(models.user_profile, {
-    //         onDelete: "restrict",
-    //         foreignKey: {
-    //             allowNull: false
-    //         }
-    //     });
-    // };
+    bookList.associate = function (models) {
+        bookList.belongsTo(models.userProfile, {
+            onDelete: "restrict",
+            foreignKey: {
+                allowNull: false
+            }
+        });
+    };
 
+ 
     return bookList;
 };
