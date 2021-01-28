@@ -111,5 +111,8 @@ $("#book-results").on("click", ".put-in-shelf", function (event) {
 
 });
 
-
-
+$("#dust-off-shelf").on("click", function(event){
+    event.preventDefault();
+    console.log("Dusting Bookshelf...");
+    location.reload();
+});

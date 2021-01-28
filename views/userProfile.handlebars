@@ -8,17 +8,21 @@
 
     <div class="container">
 
-
-
         {{#each google_book_id}}
         {{> bookshelf}}
         {{/each}}
 
-        <div>
-            <!-- MODAL TRIGGER BUTTON START -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add a new
-                book</button>
-            <!-- END MODAL TRIGGER BUTTON -->
+        <div class="d-flex flex-row justify-content-around">
+            <div>
+                <!-- MODAL TRIGGER BUTTON START -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add a new
+                    book</button>
+                <!-- END MODAL TRIGGER BUTTON -->
+            </div>
+            <div>
+                <!-- REFRESH BOOKSHELF -->
+                <button href="/profile" type="button" class="btn btn-primary" id="dust-off-shelf">Dust My Bookshelf</button>
+            </div>
         </div>
 
     </div>
@@ -46,12 +50,9 @@
     </div> --}}
 </div>
 
-<div class="container book-display">
-       
-        
-
-    </div>
-
+<div class="container d-flex flex-row flex-wrap book-display">
+    <!-- Where bookshelf will be generated -->       
+</div>
 
 <!-- MODAL START -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
