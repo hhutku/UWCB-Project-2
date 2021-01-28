@@ -30,6 +30,7 @@ function getAllBooks(title) {
 
                 const html = `<div class="card flex-row">
                     <img class="card-header border-0 book-image" src="https://via.placeholder.com/200" alt="Card image cap" id="img${i}">
+
                     <div class="card-body">
                         <h5 class="card-title title-name" id="title${i}"></h5>
                         <h6 class="book-subtitle" id="subtitle${i}"></h6>
@@ -37,6 +38,7 @@ function getAllBooks(title) {
                         <p class="card-text book-description" id="description${i}"></p>
                         <button class="btn btn-primary put-in-shelf" data-googleId=${googleId}>Add To My Bookshelf</button>
                     </div>
+
                     </div>`
 
                 $("#book-results").append(html);                
@@ -90,7 +92,6 @@ async function putInShelf(googleId) {
         })
 }
 
-
 $("#book-results").on("click", ".put-in-shelf", function (event) {
 
     event.preventDefault();
@@ -98,6 +99,7 @@ $("#book-results").on("click", ".put-in-shelf", function (event) {
     const googleId = $(this).attr("data-googleId");
 
     putInShelf(googleId);
+
 
     console.log("click")
 
