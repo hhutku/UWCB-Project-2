@@ -83,6 +83,42 @@ router.post("/api/signup", (req, res) => {
         });
     
       });
+          
+      const { Op } = require("sequelize");
+      router.get("/api/check/:userId/:googleId", function(req, res) {
+       
+          db.bookList.findAll({
+            where: {
+              [Op.and]: [
+                { userprofileid: req.params.userId },
+                { google_book_id: req.params.googleId }
+              ]
+            } 
+         
+        }).then(function(isExist) {
+       
+          res.json(isExist);
+        });
+      });
+
+      router.get("/api/bookList/:userid", function(req, res) {
+        db.bookList.findAll({
+          where: {
+            userProfileId: req.params.userid
+          }
+
+         }).then(function(Data) {
+    
+            var aa=JSON.stringify(Data)
+            var list=JSON.parse(aa)
+              
+           res.json(list)
+        
+          });
+       
+      });
+
+     
 
 
 module.exports = router;
