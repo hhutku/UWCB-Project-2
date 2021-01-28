@@ -35,7 +35,7 @@ function getAllBooks(title) {
                         <h6 class="book-subtitle" id="subtitle${i}"></h6>
                         <h7 class="author" id="author${i}"></h7>
                         <p class="card-text book-description" id="description${i}"></p>
-                        <a href="#" class="btn btn-primary" id="put-in-shelf" data-googleId=${googleId}>Add To My Bookshelf</a>
+                        <button class="btn btn-primary" id="put-in-shelf" data-googleId=${googleId}>Add To My Bookshelf</button>
                     </div>
                     </div>`
 
@@ -94,10 +94,13 @@ async function putInShelf() {
 }
 
 
-shelf.on("click", event => {
+$("#put-in-shelf").click(function (event) {
+
     event.preventDefault();
 
-    putInShelf();
+    // putInShelf(googleId);
+
+    console.log("click")
 
 });
 
