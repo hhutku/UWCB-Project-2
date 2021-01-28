@@ -1,10 +1,10 @@
 
 
-$.get("/api/user_data").then(data => {
-    const text = "id " + data.id + " " + " email : " + data.email + " name :" + data.first_name;
-    $("#welcome").text(text);
+// $.get("/api/user_data").then(data => {
+//     const text = "id " + data.id + " " + " email : " + data.email + " name :" + data.first_name;
+//     $("#welcome").text(text);
 
-})
+// })
 
 function getAllBooks(title) {
 
@@ -26,9 +26,9 @@ function getAllBooks(title) {
             $("#book-results").empty()
             for (i = 0; i < 20; i++) {
 
-    let googleId = res.items[i].id;
+                let googleId = res.items[i].id;
 
-    const html = `<div class="card flex-row">
+                const html = `<div class="card flex-row">
         <img class="card-header border-0 book-image" src="https://via.placeholder.com/200" alt="Card image cap" id="img${i}">
 
         <div class="card-body">
@@ -40,14 +40,14 @@ function getAllBooks(title) {
         </div>
 
         </div>`
-       
-    $("#book-results").append(html);                
-    $("#img" + i).attr("src", res.items[i].volumeInfo.imageLinks.smallThumbnail);
-    $("#title" + i).text(res.items[i].volumeInfo.title);
-    $("#author" + i).text(res.items[i].volumeInfo.authors[0]);
-    $("#description" + i).text(res.items[i].volumeInfo.description.substring(0, 280)+"...");
-    $("googleID" + i).attr("data-bookId", bookId)
-           
+
+                $("#book-results").append(html);
+                $("#img" + i).attr("src", res.items[i].volumeInfo.imageLinks.smallThumbnail);
+                $("#title" + i).text(res.items[i].volumeInfo.title);
+                $("#author" + i).text(res.items[i].volumeInfo.authors[0]);
+                $("#description" + i).text(res.items[i].volumeInfo.description.substring(0, 280) + "...");
+                $("googleID" + i).attr("data-bookId", bookId)
+
             }
 
             console.log(bookId);
@@ -82,15 +82,21 @@ const shelf = $(".put-in-shelf");
 async function putInShelf(googleId) {
     const data = await $.get("/api/user_data");
     const userProfileId = data.id
-    console.log("---------------UserProfileId-------------")
-    console.log(userProfileId)
-    $.post("/api/bookList", {
-        google_book_id: googleId,
-        userProfileId: userProfileId
-    })
-        .then(() => {
-            console.log("ok")
+ 
+    const check = await $.get(`/api/check/${userProfileId}/${googleId}`);
+  
+    console.log(check)
+    if (!check.length) {
+
+        $.post("/api/bookList", {
+            google_book_id: googleId,
+            userProfileId: userProfileId
         })
+            .then(() => {
+                console.log("ok")
+            })
+    }
+
 }
 
 $("#book-results").on("click", ".put-in-shelf", function (event) {
@@ -101,7 +107,9 @@ $("#book-results").on("click", ".put-in-shelf", function (event) {
 
     putInShelf(googleId);
 
-
     console.log("click")
 
 });
+
+
+
