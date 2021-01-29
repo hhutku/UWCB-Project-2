@@ -1,4 +1,4 @@
-/* main {
+main {
     max-width: 1200px;
     margin: auto;
     display: table;
@@ -15,6 +15,6 @@ tr td:last-child {
 tr:last-child td {
     text-align: right;
 }
- .hidden {
-     display: none;
- } */
+.hidden {
+    display: none;
+}

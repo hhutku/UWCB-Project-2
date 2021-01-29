@@ -1,0 +1,28 @@
+<div id='comment-{{id}}' class='comment-box' data-id='{{id}}' data-commenter='{{userId}}'>
+    <div class='meta-box'>
+        <span class='name-display'>{{userName}}</span>
+        <span class='time-display' data-timestamp='{{time.format('LLL')}}'>{{time.fromNow()}}</span>
+    </div>
+    <div class='message-box'>
+        <div class='message-display{{displayed ? '' : ' removed'}}'>{{displayed ? text : notDisplayedMessage}}</div>
+        {{#if displayed}}
+        <div class='options-box'><div>
+            <button class='reply-button comment-option'>💬 Reply</button>
+            {{#if isActiveUser}}
+            <button class='edit-button comment-option'>✏️ Edit</button>
+            <button class='delete-button comment-option'>❌ Delete</button>
+            {{/if}}
+        </div>
+        {{/if}}
+    </div>
+    <div class='input-box'>
+        <textarea class='message-input' rows='3'></textarea>
+        <div class='input-button-box'>
+            <button class='save-input-button'>Save</button>
+            <button class='cancel-input-button'>Cancel</button>
+        </div>
+    </div>
+    <div class='subcomment-list'>
+        {{> comments}}
+    </div>
+</div>
