@@ -7,8 +7,10 @@
 // })
 
 function getAllBooks(title) {
-
-    let queryURL = `https://www.googleapis.com/books/v1/volumes?q=${title}&key=AIzaSyAKge42MtCOGCe7Y898T64vRpM-SpXkdfw`
+   //AIzaSyA980flXE5W-nukjTx84gphG2dT-DXaHxA
+//&key=AIzaSyAKge42MtCOGCe7Y898T64vRpM-SpXkdfw
+// /&key=AIzaSyA980flXE5W-nukjTx84gphG2dT-DXaHxA
+    let queryURL = `https://www.googleapis.com/books/v1/volumes?q=${title}`
     $.ajax({
         url: queryURL,
         method: "GET"
@@ -90,6 +92,7 @@ async function putInShelf(googleId) {
 
         $.post("/api/bookList", {
             google_book_id: googleId,
+            completed: false,
             userProfileId: userProfileId
         })
             .then(() => {
