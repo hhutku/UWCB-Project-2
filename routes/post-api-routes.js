@@ -49,7 +49,7 @@ router.post("/api/signup", (req, res) => {
     }
   });
 
-  router.post("/api/booklist", (req, res) => {
+  router.post("/api/bookList", (req, res) => {
     db.bookList.create({
       google_book_id: req.body.google_book_id,
       completed: req.body.completed,
@@ -101,6 +101,8 @@ router.post("/api/signup", (req, res) => {
         });
       });
 
+      
+
       router.get("/api/bookList/:userid", function(req, res) {
         db.bookList.findAll({
           where: {
@@ -118,6 +120,34 @@ router.post("/api/signup", (req, res) => {
        
       });
 
+      router.put("/api/bookList/:id/:isCompleted", function(req, res) {
+        db.bookList.update({completed:req.params.isCompleted},
+          
+          {
+            where: {
+              google_book_id: req.params.id
+            }
+          })
+          .then(function(data) {
+            res.json(data);
+          
+            
+          });
+      });
+
+      // router.delete("/api/bookList/:id/:userProfileId", function(req, res) {
+   
+      //   db.bookList.destroy({
+      //     where: {
+      //       google_book_id: req.params.id,
+      //       userProfileId:req.params.userProfileId
+
+      //     }
+      //   }).then(function(book) {
+      //     res.json(book);
+      //   });
+    
+      // });
      
 
 
