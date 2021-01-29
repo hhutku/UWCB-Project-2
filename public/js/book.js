@@ -1,7 +1,7 @@
-$.get("/api/user_data").then(data => {
-    const text = `ID: ${data.id} | Name: ${data.firstName} ${data.lastName} | Email: ${data.email}`;
-    $("#welcome").text(text);
-})
+// $.get("/api/user_data").then(data => {
+//     const text = `ID: ${data.id} | Name: ${data.firstName} ${data.lastName} | Email: ${data.email}`;
+//     $("#welcome").text(text);
+// })
 
 function getAllBooks(title) {
     let queryURL = `https://www.googleapis.com/books/v1/volumes?q=${title}&key=AIzaSyAKge42MtCOGCe7Y898T64vRpM-SpXkdfw`
@@ -74,3 +74,6 @@ $("#book-results").on("click", ".put-in-shelf", function (event) {
     const bookId = $(this).attr("data-bookId");
     putInShelf(bookId);
 });
+
+
+

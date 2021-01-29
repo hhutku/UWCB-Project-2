@@ -3,7 +3,6 @@ const router = require("express").Router();
 const passport = require("../config/passport");
 
 router.post("/api/login", passport.authenticate("local"), (req, res) => {
-	console.log('2xxxxxxxxxxxxxxxxxx');
 	res.json(req.user);
 });
 
@@ -30,16 +29,6 @@ router.get("/api/user_data", (req, res) => {
 	}
 });
 
-router.post("/api/booklist", (req, res) => {
-	db.bookList.create(req.body)
-		.then(() => {
-			res.send("ok")
-		})
-		.catch(err => {
-			res.status(401).json(err);
-		});
-});
-1
 router.post("/api/comment", (req, res) => {
 	db.user_comment.create(req.body)
 		.then(data => {
@@ -48,6 +37,34 @@ router.post("/api/comment", (req, res) => {
 		.catch(err => {
 			res.status(401).json(err);
 		});
+
+});
+
+const {Op} = require("sequelize");
+router.get("/api/check/:userId/:bookId", function (req, res) {
+	db.bookList.findAll({
+		where: {
+			[Op.and]: [{ 
+				userId: req.params.userId, 
+				bookId: req.params.bookId
+			}]
+		}
+	}).then(isExist => {
+		res.json(isExist);
+	});
+});
+
+router.get("/api/bookList/:userId", function (req, res) {
+	db.bookList.findAll({
+		where: {
+			userId: req.params.userId
+		}
+	}).then(data => {
+		const str = JSON.stringify(data)
+		const list = JSON.parse(str)
+
+		res.json(list)
+	});
 });
 
 router.put("/api/comment", (req, res) => {
