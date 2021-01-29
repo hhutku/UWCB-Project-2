@@ -1,6 +1,6 @@
-module.exports = (sequelize, DataTypes) => {
+module.exports = function (sequelize, DataTypes) {
     const bookList = sequelize.define("bookList", {
-        bookId: {
+        google_book_id: {
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -14,12 +14,15 @@ module.exports = (sequelize, DataTypes) => {
         }
     });
 
-    bookList.associate = models => {
+    bookList.associate = function (models) {
         bookList.belongsTo(models.userProfile, {
             onDelete: "restrict",
-            foreignKey: 'userId'
+            foreignKey: {
+                allowNull: false
+            }
         });
     };
 
+ 
     return bookList;
 };

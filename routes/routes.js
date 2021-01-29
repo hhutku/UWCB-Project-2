@@ -30,9 +30,9 @@ module.exports = function (app) {
         res.render("signUp");
     });
 
-    app.get("/login", function (req, res) {
-        res.sendFile(path.join(__dirname, "../public/login.html"));
-    });
+    // app.get("/login", function (req, res) {
+    //     res.sendFile(path.join(__dirname, "../public/login.html"));
+    // });
 
     
     app.get("/profile",isAuthenticated,function (req, res) {

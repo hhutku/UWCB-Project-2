@@ -1,44 +1,20 @@
-main {
-	max-width: 1200px;
-	margin: auto;
-	display: table;
+/* main {
+    max-width: 1200px;
+    margin: auto;
+    display: table;
 }
 form {
-	margin: 0px 0;
+    margin: 0px 0;
 }
 table {
-	margin: 10px 0;
+    margin: 10px 0;
 }
 tr td:last-child {
-	padding-left: 10px;
+    padding-left: 10px;
 }
 tr:last-child td {
-	text-align: right;
+    text-align: right;
 }
-.hidden {
-	display: none;
-}
-
-.toast {
-    visibility: hidden;
-    position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
-    color: white;
-    padding: 1rem 2rem;
-    border-radius: 3px;
-    bottom: 7%;
-    z-index: 1;
-}
-.toast.show {
-	visibility: visible;
-	animation: fadein 0.5s, fadeout 0.75s 2.5s;
-}
-@keyframes fadein {
-	from { bottom: 0; opacity: 0; }
-	to { bottom: 7%; opacity: 1; }
-}
-@keyframes fadeout {
-	from { bottom: 7%; opacity: 1; }
-	to { bottom: 0%; opacity: -1; }
-}
+ .hidden {
+     display: none;
+ } */

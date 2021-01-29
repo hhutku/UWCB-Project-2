@@ -1,27 +1,40 @@
 <div class="container">
+
     <div class="row">
-        <img class="col-4" src="{{thumbnailURL}}" alt="Book thumbnail">
+
+        <div class="col-4">
+
+            <img src="https://via.placeholder.com/200" alt="Book thumbnail">
+
+        </div>
 
         <div class="col-8">
-            <h2>Book Title</h2>
-            <em>Author</em>
-            <p>Description</p>
-            <span>Rating</span>
-        </div>
-    </div>
-    <br>
-    <div id="comment-root" class="input-box container">
-        <h3>Comments</h3>
 
-        <div id="root-input" class='input-box'>
-            <textarea class="message-input" rows="5"></textarea>
-            <div class="input-button-box">
-                <button class="submit-input-button">Submit</button>
-            </div>
+            <h2>Book Title</h2>
+
+            <h4>Author</h4>
+
+            <p>Description</p>
+
+            <p>Rating</p>
+
         </div>
+
+    </div>
+
+    <br>
+
+    <div class="container">
+
+        <h4>Comments</h4>
 
         <div>
+
             {{> comments}}
+
         </div>
+
     </div>
+
+
 </div>

@@ -1,61 +1,60 @@
+
+
 $(document).ready(() => {
-	// Getting references to our form and input
-	const signupForm = $("#sign-up-form");
-	const emailInput = $("#email-input");
-	const passwordInput = $("#password-input");
-	const confirmInput = $("#confirm-input");
-	const firstNameInput = $("#first-name-input");
-	const lastNameInput = $("#last-name-input");
+  // Getting references to our form and input
+  const signupForm = $("#sign-up-form");
+  const emailInput = $("#email-input");
+  const passwordInput = $("#password-input");
+  const fnameInput = $("#first-name-input");
+  const lnameInput = $("#last-name-input");
+  const signupButton = $("#sign-up-button");
 
-	// When the signup button is clicked, we validate the email and password are not blank
-	signupForm.on("submit", event => {
-		event.preventDefault();
+  // When the signup button is clicked, we validate the email and password are not blank
+  signupForm.on("submit", event => {
+    event.preventDefault();
+    const userData = {
+      email: emailInput.val().trim(),
+      password: passwordInput.val().trim(),
+      fname: fnameInput.val().trim(),
+      lname: lnameInput.val().trim()
+    };
 
-		const email = emailInput.val().trim()
-		const password = passwordInput.val().trim()
-		const confirm = confirmInput.val().trim()
-		const firstName = firstNameInput.val().trim()
-		const lastName = lastNameInput.val().trim()
-		console.log({ email, password, firstName, lastName });
+    if (!userData.email || !userData.password || !userData.fname || !userData.lname) {
+      return;
+    }
 
-		if (email == '') {
-			emailInput.focus()
-			return displayError('You need to provied your email.')
-		}
-		if (password == '') {
-			passwordInput.focus()
-			return displayError('You need to provied a password.')
-		}
-		if (password != confirm) {
-			passwordInput.focus()
-			return displayError('The password doesn\'t match the confirm')
-		}
-		if (firstName == '') {
-			firstNameInput.focus()
-			return displayError('You need to provied your first name.')
-		}
-		if (lastName == '') {
-			lastNameInput.focus()
-			return displayError('You need to provied your last name.')
-		}
+    // If we have an email and password, run the signUpUser function
+    signUpUser(
+      userData.email,
+      userData.password,
+      userData.fname,
+      userData.lname
+    );
+    emailInput.val("");
+    passwordInput.val("");
+    fnameInput.val("");
+    lnameInput.val("");
+  });
 
-		// If we have an email and password, run the signUpUser function
-		signUpUser({ email, password, firstName, lastName });
-	});
 
-	// Does a post to the signup route. If successful, we are redirected to the members page
-	// Otherwise we log any errors
-	function signUpUser(data) {
-		$.post("/api/signup", data)
-			.then(() => {
-				window.location.replace("/profile");
-				// If there's an error, handle it by throwing up a bootstrap alert
-			})
-			.catch(handleLoginErr);
-	}
+  // Does a post to the signup route. If successful, we are redirected to the members page
+  // Otherwise we log any errors
+  function signUpUser(email, password, firstName, lastName) {
+    $.post("/api/signup", {
+      email: email,
+      password: password,
+      first_name: firstName,
+      last_name: lastName
+    })
+      .then(() => {
+        window.location.replace("/profile");
+        // If there's an error, handle it by throwing up a bootstrap alert
+      })
+      .catch(handleLoginErr);
+  }
 
-	function handleLoginErr() {
-		$("#alert .msg").text("There is sthing wrong");
-		$("#alert").fadeIn(500);
-	}
+  function handleLoginErr() {
+    $("#alert .msg").text("There is sthing wrong");
+    $("#alert").fadeIn(500);
+  }
 });
