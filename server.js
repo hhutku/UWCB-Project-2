@@ -1,4 +1,3 @@
-
 // require('dotenv').config();
 const express = require("express");
 const session = require("express-session");
@@ -8,15 +7,12 @@ const db = require("./models")
 
 const app = express();
 
-
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(express.static("public"));
 
 app.use(
-    // session({ secret:process.env.SESSION_SECRET, resave: true, saveUninitialized: true })
     session({ secret:"asflkjd", resave: true, saveUninitialized: true })
 );
 app.use(passport.initialize());
@@ -24,7 +20,6 @@ app.use(passport.session());
 
 const apiRoutes = require("./routes/post-api-routes");
 app.use(apiRoutes);
-
 
 require("./routes/routes")(app);
 
@@ -35,8 +30,6 @@ app.set("view engine", "handlebars");
 //end handlebars stuff
 
 const routes = require("./routes/routes");
-
-// const socket = require("socket.io");
 
 db.sequelize.sync({force: true}).then(function() { //TODO: remove '{force: true}'
     app.listen(PORT, function() {
