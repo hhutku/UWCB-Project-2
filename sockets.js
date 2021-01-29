@@ -8,8 +8,8 @@ module.exports = function(server) {
         console.log('new connection: ', socket.id)
         
         socket.on('send-msg', data => {
-            console.log(`USER ${data.userID} >>> sent-msg`);
-            socket.broadcast.emit(`${data.bookID}-sent-msg`, data)
+            console.log(`USER ${data.userId} >>> sent-msg`);
+            socket.broadcast.emit(`${data.bookId}-sent-msg`, data)
         })
     }
 }

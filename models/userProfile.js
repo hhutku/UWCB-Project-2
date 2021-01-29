@@ -13,34 +13,33 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false
         },
-        first_name: {
+        firstName: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        last_name: {
+        lastName: {
             type: DataTypes.STRING,
             allowNull: false
         }
     });
 
     // userProfile.associate = function (models) {
-    //     userProfile.hasMany(models.book_list, {
+    //     userProfile.hasMany(models.bookList, {
     //         onDelete: "restrict"
     //     });
 
-    //     userProfile.hasMany(models.user_comment, {
+    //     userProfile.hasMany(models.userComment, {
     //         onDelete: "restrict"
     //     });
     // };
 
-    userProfile.associate = function(models) {
-        
-        userProfile.hasMany(models.bookList, {
-          onDelete: "cascade"
-        });
-    }
+    // userProfile.associate = function (models) {
+    //     userProfile.hasMany(models.bookList, {
+    //         onDelete: "cascade"
+    //     });
+    // }
 
-    userProfile.prototype.validPassword = function (password) {
+    userProfile.prototype.validPassword = password => {
         return bcrypt.compareSync(password, this.password);
     };
 
@@ -51,6 +50,6 @@ module.exports = function (sequelize, DataTypes) {
             null
         );
     });
-    
+
     return userProfile;
 };

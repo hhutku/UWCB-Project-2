@@ -5,8 +5,8 @@ const activeBookId = 'sdfgd22sdwss'
 
 const notDisplayedMessage = 'This comment has been removed.'
 
-function createComment(id, timestamp, userID, userName, text, displayed, liked, disliked) {
-    const box = $(`<div id='comment-${id}' class='comment-box' data-id='${id}' data-commenter='${userID}'></div>`)
+function createComment(id, timestamp, userId, userName, text, displayed, liked, disliked) {
+    const box = $(`<div id='comment-${id}' class='comment-box' data-id='${id}' data-commenter='${userId}'></div>`)
     const metaBox = $(`<div class='meta-box'><div>`).appendTo(box)
     const nameDisplay = $(`<span class='name-display'>${userName}</span>`).appendTo(metaBox)
     const time = moment(timestamp)
@@ -18,7 +18,7 @@ function createComment(id, timestamp, userID, userName, text, displayed, liked, 
         // const likeButton = $(`<button class='like-button comment-option'>👍 ${liked}</button>`).appendTo(optionsBox)
         // const dislikeButton = $(`<button class='dislike-button comment-option'>👎 ${disliked}</button>`).appendTo(optionsBox)
         const replyButton = $(`<button class='reply-button comment-option'>💬 Reply</button>`).appendTo(optionsBox)
-        if (userID == activeUser.id) {
+        if (userId == activeUser.id) {
             const editButton = $(`<button class='edit-button comment-option'>✏️ Edit</button>`).appendTo(optionsBox)
             const deleteButton = $(`<button class='delete-button comment-option'>❌ Delete</button>`).appendTo(optionsBox)
         }
@@ -33,28 +33,28 @@ function createComment(id, timestamp, userID, userName, text, displayed, liked, 
 }
 
 function displayComment(data) {
-    const {id, timestamp, userID, userName, text, displayed, liked, disliked, parentID} = data
-    const parent = parentID == null ? $('#comment-root') : $(`#comment-${parentID} > .subcomment-list`)
-    createComment(id, timestamp, userID, userName, text, displayed, liked, disliked).appendTo(parent)
+    const {id, timestamp, userId, userName, text, displayed, liked, disliked, parentId} = data
+    const parent = parentId == null ? $('#comment-root') : $(`#comment-${parentId} > .subcomment-list`)
+    createComment(id, timestamp, userId, userName, text, displayed, liked, disliked).appendTo(parent)
 }
 
-// function updateLiked(commentID, count) {
-//     $(`#comment-${commentID} .like-button`).text(`👍 ${count}`)
+// function updateLiked(commentId, count) {
+//     $(`#comment-${commentId} .like-button`).text(`👍 ${count}`)
 // }
 
-// function updateDisliked(commentID, count) {
-//     $(`#comment-${commentID} .dislike-button`).text(`👎 ${count}`)
+// function updateDisliked(commentId, count) {
+//     $(`#comment-${commentId} .dislike-button`).text(`👎 ${count}`)
 // }
 
-function updateComment(commentID, message) {
-    $(`#comment-${commentID} > .message-box > .message-display`).text(message)
+function updateComment(commentId, message) {
+    $(`#comment-${commentId} > .message-box > .message-display`).text(message)
 }
 
-function removeComment(commentID) {
-    $(`#comment-${commentID} > .message-box > .message-display`)
+function removeComment(commentId) {
+    $(`#comment-${commentId} > .message-box > .message-display`)
         .text(notDisplayedMessage)
         .addClass('removed')
-    $(`#comment-${commentID} > .message-box > .options-box`).remove()
+    $(`#comment-${commentId} > .message-box > .options-box`).remove()
 }
 
 $('#comment-root').on('click', 'button', event => {
@@ -92,15 +92,15 @@ function onEditButtonClicked(comment) {
 }
 
 function onDeleteButtonClicked(comment) {
-    const commentID = comment.data('id')
-    // updateRecord(commentID, {displayed: false}).then(data => {
-        removeComment(commentID)
+    const commentId = comment.data('id')
+    // updateRecord(commentId, {displayed: false}).then(data => {
+        removeComment(commentId)
         //todo: add soccet connection.
     // })
 }
 
 function onSaveInputClicked(comment) {
-    const commentID = comment.data('id')
+    const commentId = comment.data('id')
 
     const inputBox = $(comment.find(`.input-box`)[0])
     inputBox.hide()
@@ -110,30 +110,30 @@ function onSaveInputClicked(comment) {
         const messageBox = $(comment.find('.message-box')[0])
         messageBox.show()
 
-        // updateRecord(commentID, {text}).then(data => {
-            updateComment(commentID, text)
+        // updateRecord(commentId, {text}).then(data => {
+            updateComment(commentId, text)
             //todo: add soccet connection.
         // })
     } else {
         // $push('/api/comment', {
-        //     googleBookId: activeBookId,
+        //     bookId: activeBookId,
         //     text,
         //     displayed: true,
         //     liked: 0,
         //     disliked: 0,
-        //     parentId: commentID
+        //     parentId: commentId
         // }).then(displayComment)
         //todo: add soccet connection.
         displayComment({
             id: Math.floor(Math.random() * 9999), 
             timestamp: moment().format(), 
-            userID: activeUser.id, 
+            userId: activeUser.id, 
             userName: activeUser.name, 
             text, 
             displayed: true, 
             liked: 0, 
             disliked: 0, 
-            parentID: commentID
+            parentId: commentId
         })
     }
 }
@@ -144,24 +144,24 @@ function onSubmitInputClicked(comment) {
     inputBox.text('')
     
     // $push('/api/comment', {
-    //     googleBookId: activeBookId,
+    //     BookId: activeBookId,
     //     text,
     //     displayed: true,
     //     liked: 0,
     //     disliked: 0,
-    //     parentId: commentID
+    //     parentId: commentId
     // }).then(displayComment)
     //todo: add soccet connection.
     displayComment({
         id: Math.floor(Math.random() * 9999),
         timestamp: moment().format(),
-        userID: activeUser.id,
+        userId: activeUser.id,
         userName: activeUser.name,
         text,
         displayed: true,
         liked: 0,
         disliked: 0,
-        parentID: null
+        parentId: null
     })
 }
 
@@ -175,12 +175,12 @@ function updateRecord(id, data) {
     return $put('/api/comment', {id, data})
 }
 
-function init(userID, bookID, comments) {
+function init(userId, bookId, comments) {
     // socket = io.connect(path)
     displayComment({
         id: 25, 
         timestamp: '2021-01-27 17:25:15', 
-        userID: 15, 
+        userId: 15, 
         userName: 'Makai Post', 
         text: 'I did not enjoy this book. I kept hoping it would get better, but it just kept getting worse.', 
         displayed: true, 
@@ -190,7 +190,7 @@ function init(userID, bookID, comments) {
     displayComment({
         id: 34, 
         timestamp: '2021-01-27 17:26:12', 
-        userID: 74, 
+        userId: 74, 
         userName: 'Pam Willards', 
         text: 'I thought it was really interesting, but I didn\' understand the ending.', 
         displayed: false, 
@@ -200,35 +200,35 @@ function init(userID, bookID, comments) {
     displayComment({
         id: 16, 
         timestamp: '2021-01-27 17:28:35', 
-        userID: 12, 
+        userId: 12, 
         userName: 'Mark Ruthers', 
         text: 'I agree. It started off fine, but it got wierd for no reason.', 
         displayed: true,
         liked: 1, 
         disliked: 0,
-        parentID: 25
+        parentId: 25
     })
     displayComment({
         id: 94, 
         timestamp: '2021-01-27 18:45:25', 
-        userID: 45, 
+        userId: 45, 
         userName: 'Thomas West', 
         text: 'Right!?', 
         displayed: true, 
         liked: 0, 
         disliked: 0,
-        parentID: 25
+        parentId: 25
     })
     displayComment({
         id: 94, 
         timestamp: '2021-01-27 18:45:25', 
-        userID: 45, 
+        userId: 45, 
         userName: 'Thomas West', 
         text: 'Yes!!!', 
         displayed: true, 
         liked: 0, 
         disliked: 0,
-        parentID: 94
+        parentId: 94
     })
 
     $('.comment-box:not(#comment-root)').filter(function() {

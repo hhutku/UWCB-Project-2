@@ -1,22 +1,14 @@
-
 const db = require("../models");
 const router = require("express").Router();
 const passport = require("../config/passport");
 
 router.post("/api/login", passport.authenticate("local"), (req, res) => {
-	res.json({
-		email: req.user.email,
-		id: req.user.id
-	});
+	console.log('2xxxxxxxxxxxxxxxxxx');
+	res.json(req.user);
 });
 
 router.post("/api/signup", (req, res) => {
-	db.userProfile.create({
-		email: req.body.email,
-		password: req.body.password,
-		first_name: req.body.first_name,
-		last_name: req.body.last_name
-	})
+	db.userProfile.create(req.body)
 		.then(() => {
 			res.redirect(307, "/api/login");
 		})
@@ -34,24 +26,12 @@ router.get("/api/user_data", (req, res) => {
 	if (!req.user) {
 		res.json({});
 	} else {
-
-		res.json({
-			email: req.user.email,
-			id: req.user.id,
-			first_name: req.user.first_name,
-			last_name: req.user.last_name
-		});
+		res.json(req.user);
 	}
 });
 
 router.post("/api/booklist", (req, res) => {
-	db.bookList.create({
-		google_book_id: req.body.google_book_id,
-		completed: req.body.completed,
-		ranking: req.body.ranking,
-		userProfileId: req.body.userProfileId
-
-	})
+	db.bookList.create(req.body)
 		.then(() => {
 			res.send("ok")
 		})
@@ -61,14 +41,7 @@ router.post("/api/booklist", (req, res) => {
 });
 1
 router.post("/api/comment", (req, res) => {
-	db.user_comment.create({
-		googleBookId: req.body.googleBookId,
-		text: req.body.text,
-		displayed: req.body.displayed,
-		liked: req.body.liked,
-		disliked: req.body.disliked,
-		parentId: req.body.parentId
-	})
+	db.user_comment.create(req.body)
 		.then(data => {
 			res.send(data)
 		})
