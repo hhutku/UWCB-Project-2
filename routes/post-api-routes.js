@@ -135,19 +135,19 @@ router.post("/api/signup", (req, res) => {
           });
       });
 
-      // router.delete("/api/bookList/:id/:userProfileId", function(req, res) {
+      router.delete("/api/bookList/:id/:userProfileId", function(req, res) {
    
-      //   db.bookList.destroy({
-      //     where: {
-      //       google_book_id: req.params.id,
-      //       userProfileId:req.params.userProfileId
+        db.bookList.destroy({
+          where: {
+            google_book_id: req.params.id,
+            userProfileId:req.params.userProfileId
 
-      //     }
-      //   }).then(function(book) {
-      //     res.json(book);
-      //   });
+          }
+        }).then(function(book) {
+          res.json(book);
+        });
     
-      // });
+      });
      
 
 

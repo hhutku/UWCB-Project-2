@@ -87,6 +87,24 @@ $(".book-display").on("click", ".completed", async function () {
 });
 
 
+$(".book-display").on("click", ".burn-book-delete", async function () {
+
+  var googleId = $(this).attr("data-googleId")
+
+  var {id}=await $.get("/api/user_data");
+
+  
+  $.ajax("/api/bookList/" + googleId+"/"+id, {
+    type: "DELETE"
+  }).then(
+    function () {
+      console.log(`deleted`);
+       location.reload();
+      //  $(this).parent().parent().remove()
+    }   
+  )
+});
+
 
 
 
