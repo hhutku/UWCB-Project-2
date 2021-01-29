@@ -27,14 +27,21 @@ async function userBooks(userId) {
       flex = "flexCheckChecked"
     }
 
-    var html = `<div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="${books.volumeInfo.imageLinks.smallThumbnail}" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">${books.volumeInfo.title}</h5>
-          <p class="card-text">Finished reading :  <input class="form-check-input completed" value="" data-google=${googleId} data-completed=${data[i].completed} type="checkbox" id=${flex} checked></p>
-          <p class="card-text">ranking : ${data[i].ranking}</p>
-         </div>
-      </div> `
+    var html = `
+      <div class="card w-25 p-3" style="max-height: 600px">
+        <div class="flex-column">
+          <div class="">
+            <img class="" style="max-height: 200px" src="${books.volumeInfo.imageLinks.smallThumbnail}" alt="Card image cap">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">${books.volumeInfo.title}</h5>
+            <p class="card-text">Finished reading :  <input class="form-check-input completed" value="" data-google=${googleId} data-completed=${data[i].completed} type="checkbox" id=${flex} checked></p>
+            <p class="card-text">ranking : ${data[i].ranking}</p>
+            <button class="btn btn-primary burn-book-delete" data-googleId=${googleId}>Burn Book</button>
+          </div>
+        </div>
+      </div>
+    `;
 
     $(".book-display").append(html)
   }
