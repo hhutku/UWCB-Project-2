@@ -30,8 +30,6 @@ app.engine("handlebars", handlebars({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 //end handlebars stuff
 
-// const routes = require("./routes/routes");
-
 // const socket = require("socket.io");
 
 db.sequelize.sync().then(() => {

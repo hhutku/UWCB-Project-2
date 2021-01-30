@@ -1,7 +1,4 @@
 function getAllBooks(title) {
-  //AIzaSyA980flXE5W-nukjTx84gphG2dT-DXaHxA
-  //&key=AIzaSyAKge42MtCOGCe7Y898T64vRpM-SpXkdfw
-  // /&key=AIzaSyA980flXE5W-nukjTx84gphG2dT-DXaHxA
   const queryURL = `https://www.googleapis.com/books/v1/volumes?q=${title}`;
   $.ajax({
     url: queryURL,
@@ -28,8 +25,8 @@ function getAllBooks(title) {
                             <h6 class="book-subtitle" id="subtitle${i}"></h6>
                             <h7 class="author" id="author${i}"></h7>
                             <p class="card-text book-description" id="description${i}"></p>
-                            <a class="btn btn-primary" href="/bookPage/${googleId}">See More Info</a>
-                            <button class="btn btn-primary put-in-shelf" data-googleId=${googleId}>Add To My Bookshelf</button>
+                            <a class="btn" href="/api/book/${googleId}">See More Info</a>
+                            <button class="btn put-in-shelf" data-googleId=${googleId}>Add To My Bookshelf</button>
                         </div>
                     </div>`;
 
@@ -47,7 +44,6 @@ function getAllBooks(title) {
     }
 
     console.log(bookId);
-    // getBookById(bookId);
   });
 }
 
@@ -59,18 +55,6 @@ $("#book-search").click(event => {
   getAllBooks(bookTitle);
   $("#book-results").removeClass("hidden");
 });
-
-// function getBookById(bookId) {
-
-//     let queryURL = `https://www.googleapis.com/books/v1/volumes/${bookId}?key=AIzaSyAKge42MtCOGCe7Y898T64vRpM-SpXkdfw`
-//     $.ajax({
-//         url: queryURL,
-//         method: "GET"
-//     })
-//         .then(function (res) {
-//             console.log(res);
-//         })
-// }
 
 function addedAlert() {
   const html = `<div class="alert alert-success alert-dismissible fade show" role="alert">
