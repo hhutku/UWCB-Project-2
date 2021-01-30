@@ -40,6 +40,15 @@ async function userBooks(userId) {
             <h5 class="card-title">${books.volumeInfo.title}</h5>
             <p class="card-text">Finished reading :  <input class="form-check-input completed" value="" data-google=${googleId} data-completed=${data[i].completed} type="checkbox" id=${flex} checked></p>
             <p class="card-text">ranking : ${data[i].ranking}</p>
+            <select data-google=${googleId} class="form-select" aria-label="Default select example">
+            <option selected >Rank the book</option>
+            <option $ value="1">1</option>
+            <option  value="2">2</option>
+            <option  value="3">3</option>
+            <option  value="4">4</option>
+            <option  value="5">5</option>
+          </select>
+          <br>
             <button class="btn btn-primary burn-book-delete" data-googleId=${googleId}>Burn Book</button>
           </div>
         </div>
@@ -98,4 +107,29 @@ $(".book-display").on("click", ".burn-book-delete", async function() {
     location.reload();
     //  $(this).parent().parent().remove()
   });
+});
+
+$(".book-display").on("change", ".form-select", async function() {
+  console.log("changed");
+  const { id } = await $.get("/api/user_data");
+
+  console.log($(this).val());
+  const ranking = parseInt($(this).val());
+  const rank = {
+    userProfileId: id,
+    ranking: ranking
+  };
+  const googleId = $(this).attr("data-google");
+  console.log(googleId);
+
+  $.ajax("/api/rank/" + googleId, {
+    type: "PUT",
+    data: rank
+  })
+    .then(() => {
+      console.log("ranked");
+    })
+    .catch(err => {
+      console.log(err);
+    });
 });
