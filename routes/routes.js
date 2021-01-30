@@ -26,6 +26,11 @@ module.exports = function(app) {
     res.render("userProfile");
   });
 
+  app.get("/bookPage/:bookId", (req, res) => {
+    const selected = req.params.bookId;
+    res.render("bookPage/" + selected);
+  });
+
   app.get("/book", (req, res) => {
     res.render("bookPage");
   });
