@@ -1,5 +1,6 @@
 // const path = require("path");
 // const passport = require("../config/passport");
+// const singleBook = require("../public/js/singleBook");
 
 function isAuthenticated(req, res, next) {
   if (req.user) {
@@ -27,11 +28,15 @@ module.exports = function(app) {
   });
 
   app.get("/bookPage/:bookId", (req, res) => {
-    const selected = req.params.bookId;
-    res.render("bookPage/" + selected);
+    // const googleId = req.params.bookId;
+    res.render("bookPage", req.params);
   });
+  // app.get("/bookPage/:bookId", (req, res) => {
+  //   const selected = req.params.bookId;
+  //   res.render("bookPage/" + selected);
+  // });
 
-  app.get("/book", (req, res) => {
-    res.render("bookPage");
-  });
+  // app.get("/book", (req, res) => {
+  //   res.render("bookPage");
+  // });
 };
