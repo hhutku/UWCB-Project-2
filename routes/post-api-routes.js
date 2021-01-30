@@ -3,150 +3,145 @@ const router = require("express").Router();
 const passport = require("../config/passport");
 
 router.post("/api/login", passport.authenticate("local"), (req, res) => {
-	res.json({
-		email: req.user.email,
-		id: req.user.id
-	});
+  res.json({
+    email: req.user.email,
+    id: req.user.id
+  });
 });
 
 router.post("/api/signup", (req, res) => {
-	db.userProfile.create({
-		email: req.body.email,
-		password: req.body.password,
-		first_name: req.body.first_name,
-		last_name: req.body.last_name
-	})
-		.then(() => {
-			res.redirect(307, "/api/login");
-		})
-		.catch(err => {
-			res.status(401).json(err);
-		});
+  db.userProfile
+    .create({
+      email: req.body.email,
+      password: req.body.password,
+      // eslint-disable-next-line camelcase
+      first_name: req.body.first_name,
+      // eslint-disable-next-line camelcase
+      last_name: req.body.last_name
+    })
+    .then(() => {
+      res.redirect(307, "/api/login");
+    })
+    .catch(err => {
+      res.status(401).json(err);
+    });
 });
 
 router.get("/logout", (req, res) => {
-	req.logout();
-	res.redirect("/");
+  req.logout();
+  res.redirect("/");
+});
+
+router.get("/api/user_data", (req, res) => {
+  if (!req.user) {
+    res.json({});
+  } else {
+    res.json({
+      email: req.user.email,
+      id: req.user.id,
+      // eslint-disable-next-line camelcase
+      first_name: req.user.first_name,
+      // eslint-disable-next-line camelcase
+      last_name: req.user.last_name
+    });
+  }
 });
 
 router.post("/api/bookList", (req, res) => {
-	db.bookList.create({
-		google_book_id: req.body.google_book_id,
-		completed: req.body.completed,
-		ranking: req.body.ranking,
-		userProfileId: req.body.userProfileId
-	})
-		.then(() => {
-			res.send("ok")
-		})
-		.catch(err => {
-			res.status(401).json(err);
-		});
-});
-
-router.post("/api/booklist", (req, res) => {
-	db.bookList.create({
-		google_book_id: req.body.google_book_id,
-		completed: req.body.completed,
-		ranking: req.body.ranking,
-		userProfileId: req.body.userProfileId
-	})
-		.then(() => {
-			res.send("ok")
-		})
-		.catch(err => {
-			res.status(401).json(err);
-		});
+  db.bookList
+    .create({
+      // eslint-disable-next-line camelcase
+      google_book_id: req.body.google_book_id,
+      completed: req.body.completed,
+      ranking: req.body.ranking,
+      userProfileId: req.body.userProfileId
+    })
+    .then(() => {
+      res.send("ok");
+    })
+    .catch(err => {
+      res.status(401).json(err);
+    });
 });
 
 router.post("/api/comment", (req, res) => {
-	db.userComment.create({
-		bookId: req.body.googleBookId,
-		text: req.body.text,
-		displayed: req.body.displayed,
-		liked: req.body.liked,
-		disliked: req.body.disliked,
-	})
-		.then(() => {
-			res.send("ok")
-		})
-		.catch(err => {
-			res.status(401).json(err);
-		});
+  db.user_comment
+    .create({
+      googleBookId: req.body.googleBookId,
+      text: req.body.text,
+      displayed: req.body.displayed,
+      liked: req.body.liked,
+      disliked: req.body.disliked
+    })
+    .then(() => {
+      res.send("ok");
+    })
+    .catch(err => {
+      res.status(401).json(err);
+    });
 });
 
-router.get("/api/bookList/:userid", function (req, res) {
-	db.bookList.findAll({
-		where: {
-			userProfileId: req.params.userid
-		}
-	})
-})
-
-const { Op, where } = require("sequelize");
-router.get("/api/check/:userId/:googleId", function (req, res) {
-	db.bookList.findAll({
-		where: {
-			[Op.and]: [
-				{ userprofileid: req.params.userId },
-				{ google_book_id: req.params.googleId }
-			]
-		}
-	}).then(function (isExist) {
-		res.json(isExist);
-	});
+const { Op } = require("sequelize");
+router.get("/api/check/:userId/:googleId", (req, res) => {
+  db.bookList
+    .findAll({
+      where: {
+        [Op.and]: [
+          { userprofileid: req.params.userId },
+          // eslint-disable-next-line camelcase
+          { google_book_id: req.params.googleId }
+        ]
+      }
+    })
+    .then(isExist => {
+      res.json(isExist);
+    });
 });
 
-router.get("/api/book/:bookId", function (req, res) {
-	console.log('--------------------------------------');
-	db.userComment.findAll({
-		where: {
-			[Op.and]: [req.params],
-			include: [{
-				model: db.userProfile
-			}]
-		}
-	}).then(data => {
-		console.log({ isExist: data });
-		res.json(data);
-	}).catch(err => {
-		console.log({ err });
-	});
+router.get("/api/bookList/:userid", (req, res) => {
+  db.bookList
+    .findAll({
+      where: {
+        userProfileId: req.params.userid
+      }
+    })
+    .then(Data => {
+      const aa = JSON.stringify(Data);
+      const list = JSON.parse(aa);
+
+      res.json(list);
+    });
 });
 
-router.put("/api/bookList/:id/:isCompleted", function (req, res) {
-	db.bookList.update({ completed: req.params.isCompleted },
-		{
-			where: {
-				google_book_id: req.params.id
-			}
-		})
-		.then(function (data) {
-			res.json(data);
-		});
+router.put("/api/bookList/:id/:isCompleted", (req, res) => {
+  db.bookList
+    .update(
+      { completed: req.params.isCompleted },
+
+      {
+        where: {
+          // eslint-disable-next-line camelcase
+          google_book_id: req.params.id
+        }
+      }
+    )
+    .then(data => {
+      res.json(data);
+    });
 });
 
-router.delete("/api/bookList/:id/:userProfileId", function (req, res) {
-	db.bookList.destroy({
-		where: {
-			google_book_id: req.params.id,
-			userProfileId: req.params.userProfileId
-		}
-	}).then(function (book) {
-		res.json(book);
-	});
-});
-
-router.get("/api/bookList/:userid", function (req, res) {
-	db.bookList.findAll({
-		where: {
-			userProfileId: req.params.userid
-		}
-	}).then(function (Data) {
-		var aa = JSON.stringify(Data)
-		var list = JSON.parse(aa)
-		res.json(list)
-	});
+router.delete("/api/bookList/:id/:userProfileId", (req, res) => {
+  db.bookList
+    .destroy({
+      where: {
+        // eslint-disable-next-line camelcase
+        google_book_id: req.params.id,
+        userProfileId: req.params.userProfileId
+      }
+    })
+    .then(book => {
+      res.json(book);
+    });
 });
 
 module.exports = router;
