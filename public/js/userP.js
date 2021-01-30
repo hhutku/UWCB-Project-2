@@ -14,15 +14,12 @@ $.get("/api/user_data").then(data => {
 
 async function userBooks(userId) {
   const data = await $.get(`/api/bookList/${userId}`);
-  console.log(data.length);
 
   for (i = 0; i < data.length; i++) {
     const googleId = data[i].google_book_id;
 
     const queryURL = `https://www.googleapis.com/books/v1/volumes/${googleId}`;
     const books = await $.ajax({ url: queryURL, method: "GET" });
-    console.log(books);
-    console.log(books.volumeInfo.title);
 
     const check = await $.get(`/api/check/${userId}/${googleId}`);
     let flex = "";
@@ -64,7 +61,6 @@ $(".book-display").on("click", ".completed", async function() {
 
   const isCompleted = $(this).attr("data-completed");
 
-  console.log(isCompleted);
   if (isCompleted === "false") {
     $.ajax("/api/bookList/" + googleId + "/1", {
       type: "PUT",
@@ -120,7 +116,6 @@ $(".book-display").on("change", ".form-select", async function() {
     ranking: ranking
   };
   const googleId = $(this).attr("data-google");
-  console.log(googleId);
 
   $.ajax("/api/rank/" + googleId, {
     type: "PUT",

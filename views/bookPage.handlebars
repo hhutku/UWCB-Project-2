@@ -1,3 +1,28 @@
 <div class="container" id="displayBookPage">
-    
+    <div class="row">
+        <div class="col-4">
+            <img id="book-img" src="#" alt="Book thumbnail">
+        </div>
+        <div class="col-8">
+            <h2 id="book-title"></h2>
+            <p id="book-authors"></p>
+            <h3>Description:</h3>
+            <p id="book-description"></p>
+            <p>Average Rating: <span id="book-rating"></span></p>
+            <p>Published Date: <span id="book-publish-date"></span></p>
+            <p>Pages: <span id="book-page-count"></span></p>
+            <a id="book-buy-button" class="btn btn-primary" href="">Buy the Book</a>
+        </div>
+    </div>
+    <br>
+    <div id="comment-root" class="comment-box container">
+        <h3>Comments</h4>
+
+        <div id='root-input' class='input-box'>
+            <textarea class='message-input' rows='3'></textarea>
+            <div class='input-button-box'>
+                <button class='submit-input-button'>Submit</button>
+            </div>
+        </div>
+    </div>
 </div>
