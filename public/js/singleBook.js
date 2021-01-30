@@ -1,0 +1,33 @@
+console.log(this);
+singleBook(window.location.href.split("/").pop());
+function singleBook(googleId) {
+  const queryURL = `https://www.googleapis.com/books/v1/volumes/${googleId}`;
+
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then(res => {
+    console.log(res);
+    const html = `
+      <div class="row">
+          <div class="col-4">
+              <img src="${res.volumeInfo.imageLinks.thumbnail}" alt="Book thumbnail">
+          </div>
+          <div class="col-8">
+              <h2>${res.volumeInfo.title}</h2>
+              <h4>${res.volumeInfo.authors[0]}</h4>
+              <p>Description:</p>
+              <p>${res.volumeInfo.description}</p>
+              <p>Average Rating: ${res.volumeInfo.averageRating}</p>
+              <p>Published Date: ${res.volumeInfo.publishedDate}</p>
+              <p>Pages: ${res.volumeInfo.pageCount}</p>
+              <a class="btn btn-primary" href="${res.saleInfo.buyLink}">Buy the Book</a>
+          </div>
+      </div>
+      <br>
+      `;
+    $("#displayBookPage").append(html);
+  });
+}
+
+module.exports = singleBook;
