@@ -151,6 +151,7 @@ router.put("/api/rank/:id", (req, res) => {
 
       {
         where: {
+          // eslint-disable-next-line camelcase
           google_book_id: req.params.id,
           userProfileId: req.body.userProfileId
         }

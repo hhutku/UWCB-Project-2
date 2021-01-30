@@ -1,23 +1,68 @@
-/* main {
+* {
+    font-family: 'Baskervville', serif;
+}
+
+main {
     max-width: 1200px;
     margin: auto;
     display: table;
 }
+
 form {
     margin: 0px 0;
 }
+
 table {
     margin: 10px 0;
 }
+
 tr td:last-child {
     padding-left: 10px;
 }
+
 tr:last-child td {
     text-align: right;
 }
- .hidden {
-     display: none;
- } */
+
  .form-select{
     width :60%;
+}
+
+html {
+    height: 100vh;
+    width: 100%;
+}
+
+.navbar, .jumbotron {
+    background-color: #0096c7;
+}
+
+.jumbotron h1 {
+    font-size: 60px;
+}
+
+.jumbotron p {
+    font-size: 25px;
+}
+
+.btn {
+    background-color: #0096c7;
+    opacity: 0.85;
+    margin: 5px;
+}
+
+.btn:hover {
+    outline: black;
+}
+
+.card {
+    opacity: 0.85;
+}
+
+#bookshelvesImg {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: -99;
+    opacity: 0.5;
 }

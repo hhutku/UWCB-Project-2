@@ -21,7 +21,6 @@ function singleBook(googleId) {
               <p>Average Rating: ${res.volumeInfo.averageRating}</p>
               <p>Published Date: ${res.volumeInfo.publishedDate}</p>
               <p>Pages: ${res.volumeInfo.pageCount}</p>
-              <a class="btn btn-primary" href="${res.saleInfo.buyLink}">Buy the Book</a>
           </div>
       </div>
       <br>
