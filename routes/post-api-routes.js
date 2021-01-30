@@ -64,6 +64,17 @@ router.post("/api/bookList", (req, res) => {
     });
 });
 
+router.get("/api/comment/:bookId", (req, res) => {
+  console.log(req.params);
+  db.userComment
+    .findAll({
+      where: req.params
+    })
+    .then(data => {
+      res.json(data);
+    });
+});
+
 router.post("/api/comment", (req, res) => {
   db.user_comment
     .create({
