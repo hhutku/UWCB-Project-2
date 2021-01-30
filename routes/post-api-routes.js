@@ -1,6 +1,7 @@
 const db = require("../models");
 const router = require("express").Router();
 const passport = require("../config/passport");
+const { Op } = require("sequelize");
 
 router.post("/api/login", passport.authenticate("local"), (req, res) => {
   res.json({
@@ -42,7 +43,8 @@ router.get("/api/user_data", (req, res) => {
       // eslint-disable-next-line camelcase
       first_name: req.user.first_name,
       // eslint-disable-next-line camelcase
-      last_name: req.user.last_name
+      last_name: req.user.last_name,
+      name: `${req.user.first_name} ${req.user.last_name}`
     });
   }
 });
@@ -68,7 +70,13 @@ router.get("/api/comment/:bookId", (req, res) => {
   console.log(req.params);
   db.userComment
     .findAll({
-      where: req.params
+      where: req.params,
+      include: [
+        {
+          model: db.userProfile,
+          required: false
+        }
+      ]
     })
     .then(data => {
       res.json(data);
@@ -76,23 +84,22 @@ router.get("/api/comment/:bookId", (req, res) => {
 });
 
 router.post("/api/comment", (req, res) => {
-  db.user_comment
-    .create({
-      googleBookId: req.body.googleBookId,
-      text: req.body.text,
-      displayed: req.body.displayed,
-      liked: req.body.liked,
-      disliked: req.body.disliked
-    })
-    .then(() => {
-      res.send("ok");
+  db.userComment
+    .create(req.body)
+    .then(data => {
+      res.json(data);
     })
     .catch(err => {
       res.status(401).json(err);
     });
 });
 
-const { Op } = require("sequelize");
+router.put("/api/comment", (req, res) => {
+  db.userComment
+    .update(req.body.data, { where: req.body.id })
+    .then(data => res.json(data));
+});
+
 router.get("/api/check/:userId/:googleId", (req, res) => {
   db.bookList
     .findAll({

@@ -3,11 +3,11 @@
 // let socket;
 
 let user;
+let bookId;
 
 const notDisplayedMessage = "This comment has been removed.";
 
 function createComment(commentId, timestamp, userId, userName, text, displayed) {
-  console.log("c---------------------------");
   const box = $(`<div id='comment-${commentId}' class='comment-box' data-id='${commentId}' data-commenter='${userId}'></div>`);
   const metaBox = $("<div class='meta-box'></div>").appendTo(box);
   const nameDisplay = $(`<span class='name-display'>${userName}</span>`).appendTo(metaBox);
@@ -33,13 +33,9 @@ function createComment(commentId, timestamp, userId, userName, text, displayed) 
 }
 
 function displayComment(data) {
-  console.log(data);
-  console.log("b---------------------------");
-  const {id, timestamp, userId, userName, text, displayed, liked, disliked, parentId} = data;
+  const {id, timestamp, userId, userName, text, displayed, parentId} = data;
   const parent = parentId === null ? $("#comment-root") : $(`#comment-${parentId} > .subcomment-list`);
-  console.log(parentId);
-  createComment(id, timestamp, userId, userName, text, displayed, liked, disliked).appendTo(parent);
-  console.log("d---------------------------");
+  createComment(id, timestamp, userId, userName, text, displayed).appendTo(parent);
 }
 
 function updateComment(commentId, message) {
@@ -47,23 +43,27 @@ function updateComment(commentId, message) {
 }
 
 function removeComment(commentId) {
-  $(`#comment-${commentId} > .message-box > .message-display`)
-    .text(notDisplayedMessage)
-    .addClass("removed");
-  $(`#comment-${commentId} > .message-box > .options-box`).remove();
+  const comment = $(`#comment-${commentId}`);
+  if (comment.children(".subcomment-list").children().length === 0) {
+    comment.remove();
+  } else {
+    $(`#comment-${commentId} > .message-box > .message-display`)
+      .text(notDisplayedMessage)
+      .addClass("removed");
+    $(`#comment-${commentId} > .message-box > .options-box`).remove();
+  }
 }
 
 $("#comment-root").on("click", "button", event => {
   const target = event.target;
   const classList = Object.values(target.classList);
   const comment = $(target.closest(".comment-box"));
-  console.log(target);
 
   if (classList.includes("reply-button")) {return onReplyButtonClicked(comment);}
   if (classList.includes("edit-button")) {return onEditButtonClicked(comment);}
   if (classList.includes("delete-button")) {return onDeleteButtonClicked(comment);}
   if (classList.includes("save-input-button")) {return onSaveInputClicked(comment);}
-  if (classList.includes("submit-input-button")) {return onSubmitInputClicked(comment);}
+  if (classList.includes("submit-input-button")) {return onSubmitInputClicked();}
   if (classList.includes("cancel-input-button")) {return onCancelInputClicked(comment);}
 
   target.blur();
@@ -89,10 +89,11 @@ function onEditButtonClicked(comment) {
 
 function onDeleteButtonClicked(comment) {
   const commentId = comment.data("id");
-  // updateRecord(commentId, {displayed: false}).then(data => {
-  removeComment(commentId);
-  //todo: add soccet connection.
-  // })
+
+  updateRecord(commentId, {displayed: false}).then(() => {
+    removeComment(commentId);
+  // todo: add soccet connection.
+  });
 }
 
 function onSaveInputClicked(comment) {
@@ -106,50 +107,53 @@ function onSaveInputClicked(comment) {
     const messageBox = $(comment.find(".message-box")[0]);
     messageBox.show();
 
-    // updateRecord(commentId, {text}).then(data => {
-    updateComment(commentId, text);
-    //todo: add soccet connection.
-    // })
-  } else {
-    //todo: add soccet connection.
-    displayComment({
-      id: Math.floor(Math.random() * 9999), 
-      timestamp: moment().format(), 
-      userId: user.id, 
-      userName: user.name, 
-      text, 
-      displayed: true, 
-      liked: 0, 
-      disliked: 0, 
-      parentId: commentId
+    updateRecord(commentId, {text}).then(data => {
+      updateComment(commentId, text);
+    // todo: add soccet connection.
     });
+  } else {
+    $.post("/api/comment", {
+      userId: user.id,
+      bookId,
+      text,
+      displayed: true,
+      parentId: commentId
+    }).then(data => {  
+      displayComment({
+        id: data.id, 
+        timestamp: data.createdAt, 
+        userId: user.id, 
+        userName: user.name, 
+        text, 
+        displayed: true,
+        parentId: commentId
+      });
+    });
+
+    //todo: add soccet connection.
   }
 }
 
-function onSubmitInputClicked(comment) {
-  const inputBox = $(comment.find(".input-box")[0]);
-  const text = inputBox.find(".message-input").val().trim();
-  inputBox.text("");
-    
-  // $push('/api/comment', {
-  //     BookId: activeBookId,
-  //     text,
-  //     displayed: true,
-  //     liked: 0,
-  //     disliked: 0,
-  //     parentId: commentId
-  // }).then(displayComment)
-  //todo: add soccet connection.
-  displayComment({
-    id: Math.floor(Math.random() * 9999),
-    timestamp: moment().format(),
+function onSubmitInputClicked() {
+  const textarea = $("#root-input > .message-input");
+  const text = textarea.val().trim();
+  textarea.val("");
+
+  $.post("/api/comment", {
     userId: user.id,
-    userName: user.name,
+    bookId,
     text,
-    displayed: true,
-    liked: 0,
-    disliked: 0,
-    parentId: null
+    displayed: true
+  }).then(data => {  
+    displayComment({
+      id: data.id, 
+      timestamp: data.createdAt, 
+      userId: user.id, 
+      userName: user.name, 
+      text, 
+      displayed: true,
+      parentId: null
+    });
   });
 }
 
@@ -160,21 +164,24 @@ function onCancelInputClicked(comment) {
 }
 
 function updateRecord(id, data) {
-  return $put("/api/comment", {id, data});
+  return $.ajax("/api/comment", {
+    type: "PUT",
+    data: { id: {id}, data }
+  });
 }
 
-function insertComments(commentData, userData) {
-  userData.name = `${userData.first_name} ${userData.last_name}`;
-  user = userData;
+function insertComments(bookData, commentData, userData) {
+  bookId = bookData.id;
   for (const comment of commentData) {
+    user = userData;
     displayComment({
       id: comment.id, 
       timestamp: comment.createdAt, 
-      userId: user.id, 
-      userName: user.name, 
+      userId: comment.userId,
+      userName: `${comment.userProfile.first_name} ${comment.userProfile.last_name}`, 
       text: comment.text, 
       displayed: comment.displayed,
-      parentId: comment.parentID
+      parentId: comment.parentId
     });
   }
 

@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
   userComment.associate = function(models) {
     userComment.belongsTo(models.userComment, {
       onDelete: "restrict",
-      foreignKey: "parentID"
+      foreignKey: "parentId"
     });
     userComment.belongsTo(models.userProfile, {
       onDelete: "restrict",
