@@ -144,4 +144,21 @@ router.delete("/api/bookList/:id/:userProfileId", (req, res) => {
     });
 });
 
+router.put("/api/rank/:id", (req, res) => {
+  db.bookList
+    .update(
+      { ranking: req.body.ranking },
+
+      {
+        where: {
+          google_book_id: req.params.id,
+          userProfileId: req.body.userProfileId
+        }
+      }
+    )
+    .then(data => {
+      res.json(data);
+    });
+});
+
 module.exports = router;
