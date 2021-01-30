@@ -38,7 +38,7 @@ async function userBooks(userId) {
             <option value="5">5</option>
           </select>
           <br>
-            <a class="btn burn-book-delete" href="/bookPage/${googleId}">See Book Info</a>
+            <a class="btn" href="/bookPage/${googleId}">See Book Info</a>
             <button class="btn burn-book-delete" data-googleId=${googleId}>Recycle Book</button>
           </div>
         </div>
