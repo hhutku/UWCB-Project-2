@@ -26,6 +26,8 @@ app.engine("handlebars", handlebars({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 //end handlebars stuff
 
+//TODO: remove '{force: true}'
+// db.sequelize.sync({ force: true }).then(() => {
 db.sequelize.sync().then(() => {
   app.listen(PORT, () => {
     console.log("Server listening on: http://localhost:" + PORT);

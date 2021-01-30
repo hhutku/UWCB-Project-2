@@ -6,12 +6,12 @@ async function userBooks(userId) {
   const data = await $.get(`/api/bookList/${userId}`);
 
   for (i = 0; i < data.length; i++) {
-    const googleId = data[i].google_book_id;
+    const bookId = data[i].google_book_id;
 
-    const queryURL = `https://www.googleapis.com/books/v1/volumes/${googleId}`;
+    const queryURL = `https://www.googleapis.com/books/v1/volumes/${bookId}`;
     const books = await $.ajax({ url: queryURL, method: "GET" });
 
-    const check = await $.get(`/api/check/${userId}/${googleId}`);
+    const check = await $.get(`/api/check/${userId}/${bookId}`);
     let flex = "";
     if (check[0].completed === true) {
       flex = "flexCheckChecked";
@@ -25,8 +25,8 @@ async function userBooks(userId) {
           </div>
           <div class="card-body">
             <h5 class="card-title">${books.volumeInfo.title}</h5>
-            <p class="card-text">Finished reading :  <input class="form-check-input completed" value="" data-google=${googleId} data-completed=${data[i].completed} type="checkbox" id=${flex} checked></p>
-            <select data-google=${googleId} class="form-select" aria-label="Default select example">
+            <p class="card-text">Finished reading :  <input class="form-check-input completed" value="" data-google=${bookId} data-completed=${data[i].completed} type="checkbox" id=${flex} checked></p>
+            <select data-google=${bookId} class="form-select" aria-label="Default select example">
             <option selected >Rank the book</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -35,8 +35,8 @@ async function userBooks(userId) {
             <option value="5">5</option>
           </select>
           <br>
-            <a class="btn" href="/bookPage/${googleId}">See Book Info</a>
-            <button class="btn burn-book-delete" data-googleId=${googleId}>Recycle Book</button>
+            <a class="btn" href="/bookPage?bookId=${bookId}">See Book Info</a>
+            <button class="btn burn-book-delete" data-googleId=${bookId}>Recycle Book</button>
           </div>
         </div>
       </div>

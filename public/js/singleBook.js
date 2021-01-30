@@ -17,7 +17,7 @@ function singleBook(bookId) {
     userData = userData[0];
 
     populateBookData(bookData);
-    insertComments(commentData, userData);
+    insertComments(bookData, commentData, userData);
   });
 }
 

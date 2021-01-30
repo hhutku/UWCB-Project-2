@@ -27,7 +27,7 @@ module.exports = function(app) {
     res.render("userProfile");
   });
 
-  app.get("/bookPage/", (req, res) => {
+  app.get("/bookPage", (req, res) => {
     // const googleId = req.params.bookId;
     res.render("bookPage", req.query);
   });
