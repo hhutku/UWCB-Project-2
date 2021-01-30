@@ -18,4 +18,6 @@ tr:last-child td {
  .hidden {
      display: none;
  } */
-
+ .form-select{
+    width :60%;
+}
