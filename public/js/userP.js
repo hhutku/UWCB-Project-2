@@ -1,14 +1,4 @@
 $.get("/api/user_data").then(data => {
-  const text =
-    "id " +
-    data.id +
-    " " +
-    " email : " +
-    data.email +
-    " name :" +
-    data.first_name;
-  $("#welcome").text(text);
-
   userBooks(data.id);
 });
 
@@ -31,7 +21,7 @@ async function userBooks(userId) {
     }
 
     const html = `
-      <div class="card w-25 p-3" style="max-height: 600px">
+      <div class="card w-25 p-3 m-0.5" style="max-height: 600px">
         <div class="flex-column">
           <div class="">
             <img class="" style="max-height: 200px" src="${books.volumeInfo.imageLinks.smallThumbnail}" alt="Card image cap">
@@ -48,7 +38,8 @@ async function userBooks(userId) {
             <option  value="5">5</option>
           </select>
           <br>
-            <button class="btn btn-primary burn-book-delete" data-googleId=${googleId}>Burn Book</button>
+            <a class="btn burn-book-delete" href="/bookPage/${googleId}">See Book Info</a>
+            <button class="btn burn-book-delete" data-googleId=${googleId}>Recycle Book</button>
           </div>
         </div>
       </div>
