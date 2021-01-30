@@ -20,7 +20,7 @@ We started out dividing up all the roles among the 5 members of our team, but qu
 
 ## Links
 
-[Github](https://github.com/ToMakPo/UWCB-Project-2)
+[Github Repo](https://github.com/ToMakPo/UWCB-Project-2)
 
-[Heroku](https://postnet-project-2.herokuapp.com/)
+[Heroku Deployed App](https://postnet-project-2.herokuapp.com/)
 
