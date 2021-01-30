@@ -1,14 +1,4 @@
 $.get("/api/user_data").then(data => {
-  const text =
-    "id " +
-    data.id +
-    " " +
-    " email : " +
-    data.email +
-    " name :" +
-    data.first_name;
-  $("#welcome").text(text);
-
   userBooks(data.id);
 });
 
@@ -28,25 +18,25 @@ async function userBooks(userId) {
     }
 
     const html = `
-      <div class="card w-25 p-3" style="max-height: 600px">
+      <div class="card p-3 col-sm-12 col-md-6 col-lg-3" style="max-height: 600px">
         <div class="flex-column">
-          <div class="">
-            <img class="" style="max-height: 200px" src="${books.volumeInfo.imageLinks.smallThumbnail}" alt="Card image cap">
+          <div>
+            <img style="max-height: 200px" src="${books.volumeInfo.imageLinks.smallThumbnail}" alt="Card image cap">
           </div>
           <div class="card-body">
             <h5 class="card-title">${books.volumeInfo.title}</h5>
             <p class="card-text">Finished reading :  <input class="form-check-input completed" value="" data-google=${googleId} data-completed=${data[i].completed} type="checkbox" id=${flex} checked></p>
-            <p class="card-text">ranking : ${data[i].ranking}</p>
             <select data-google=${googleId} class="form-select" aria-label="Default select example">
             <option selected >Rank the book</option>
-            <option $ value="1">1</option>
-            <option  value="2">2</option>
-            <option  value="3">3</option>
-            <option  value="4">4</option>
-            <option  value="5">5</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
           </select>
           <br>
-            <button class="btn btn-primary burn-book-delete" data-googleId=${googleId}>Burn Book</button>
+            <a class="btn" href="/bookPage/${googleId}">See Book Info</a>
+            <button class="btn burn-book-delete" data-googleId=${googleId}>Recycle Book</button>
           </div>
         </div>
       </div>
