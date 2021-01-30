@@ -8,41 +8,39 @@ function isAuthenticated(req, res, next) {
 
     res.render("login");
 
-    // res.sendFile(path.join(__dirname, "../public/login.html"));
 };
 
 module.exports = function (app) {
-    // app.get("/", isAuthenticated, function (req, res) {
-    //     res.sendFile(path.join(__dirname, "../public/profile.html"));
-    // });
+
 
     app.get("/login", function (req, res) {
         res.render("login");
-        // res.sendFile(path.join(__dirname, "../public/login.html"));
     });
 
     app.get("/", function (req, res) {
         res.render("login");
-        // res.sendFile(path.join(__dirname, "../public/signup.html"));
     });
 
     app.get("/signup", function (req, res) {
         res.render("signUp");
     });
-
-    // app.get("/login", function (req, res) {
-    //     res.sendFile(path.join(__dirname, "../public/login.html"));
-    // });
-
     
     app.get("/profile",isAuthenticated,function (req, res) {
-
         res.render("userProfile");
-        // res.sendFile(path.join(__dirname, "../views/userProfile.html"));
+    });
+
+    app.get("/api/book/:bookId", function (req, res) {
+        const selected = req.params.bookId
+
+        for (let i = 0; i < bookId.length; i++) {
+            if (selected === bookId[i].routeName) {
+              return res.json(bookId[i]);
+            }
+          }
+        res.render("bookPage");
     });
 
     app.get("/book", function (req, res) {
         res.render("bookPage");
-        // res.sendFile(path.join(__dirname, "../public/book.html"));
     });
 }
