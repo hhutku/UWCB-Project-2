@@ -1,6 +1,6 @@
 <div class="container">
 
-    <div>
+    <div class="my-3">
 
         {{> userInfo}}
 
@@ -13,42 +13,25 @@
         {{/each}}
 
         <div class="d-flex flex-row justify-content-around">
-            <div>
-                <!-- MODAL TRIGGER BUTTON START -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add a new
-                    book</button>
-                <!-- END MODAL TRIGGER BUTTON -->
-            </div>
-            <div>
+
+            {{!-- <div>
                 <!-- REFRESH BOOKSHELF -->
-                <button href="/profile" type="button" class="btn btn-primary" id="dust-off-shelf">Dust My
+                <button href="/profile" type="button" class="btn" id="dust-off-shelf">Dust My
                     Bookshelf</button>
-            </div>
+            </div> --}}
         </div>
 
     </div>
-    <h2>What's on my bookshelf:</h2>
+    
+    <h3>What's On My Bookshelf:</h3>
     <h3 id="welcome"></h3>
+    <div>
+        <!-- MODAL TRIGGER BUTTON START -->
+        <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">Add A New
+        Book</button>
+        <!-- END MODAL TRIGGER BUTTON -->
+    </div>
 
-    {{!-- <div class="d-flex flex-wrap">
-        {{#each bookslist}}
-        <div style="width: 200px;">
-            <img src="{{bookimage}}" alt="" style="width: 200px;">
-            <p>{{booktitle}}</p>
-            {{#if rating === 1}}
-            <p>★☆☆☆☆</p>
-            {{#else if rating === 2}}
-            <p>★★☆☆☆</p>
-            {{#else if rating === 3}}
-            <p>★★★☆☆</p>
-            {{#else if rating === 4}}
-            <p>★★★★☆</p>
-            {{#else if rating === 5}}
-            <p>★★★★★</p>
-            {{/if}}
-        </div>
-        {{/each}}
-    </div> --}}
 </div>
 
 
@@ -73,7 +56,7 @@
                     <button type="submit" id="book-search">Search</button>
                 </form>
 
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="dust-off-shelf">
                     <span aria-hidden="true">&times;</span>
                 </button>
 
