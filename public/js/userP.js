@@ -39,7 +39,6 @@ async function userBooks(userId) {
           <div class="card-body">
             <h5 class="card-title">${books.volumeInfo.title}</h5>
             <p class="card-text">Finished reading :  <input class="form-check-input completed" value="" data-google=${googleId} data-completed=${data[i].completed} type="checkbox" id=${flex} checked></p>
-            <p class="card-text">ranking : ${data[i].ranking}</p>
             <select data-google=${googleId} class="form-select" aria-label="Default select example">
             <option selected >Rank the book</option>
             <option $ value="1">1</option>
