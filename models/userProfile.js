@@ -34,9 +34,11 @@ module.exports = function (sequelize, DataTypes) {
     // };
 
     userProfile.associate = function(models) {
-        
         userProfile.hasMany(models.bookList, {
-          onDelete: "cascade"
+            onDelete: "cascade"
+        });
+        userProfile.hasMany(models.userComment, {
+            onDelete: "cascade"
         });
     }
 

@@ -58,8 +58,8 @@ router.post("/api/booklist", (req, res) => {
 });
 
 router.post("/api/comment", (req, res) => {
-	db.user_comment.create({
-		googleBookId: req.body.googleBookId,
+	db.userComment.create({
+		bookId: req.body.googleBookId,
 		text: req.body.text,
 		displayed: req.body.displayed,
 		liked: req.body.liked,
@@ -73,7 +73,7 @@ router.post("/api/comment", (req, res) => {
 		});
 });
 
-const { Op } = require("sequelize");
+const { Op, where } = require("sequelize");
 router.get("/api/check/:userId/:googleId", function (req, res) {
 	db.bookList.findAll({
 		where: {
@@ -84,6 +84,23 @@ router.get("/api/check/:userId/:googleId", function (req, res) {
 		}
 	}).then(function (isExist) {
 		res.json(isExist);
+	});
+});
+
+router.get("/api/book/:bookId", function (req, res) {
+	console.log('--------------------------------------');
+	db.userComment.findAll({
+		where: {
+			[Op.and]: [req.params],
+			include: [{
+				model: db.userProfile
+			}]
+		}
+	}).then(data => {
+		console.log({isExist: data});
+		res.json(data);
+	}).catch(err => {
+		console.log({err});
 	});
 });
 
