@@ -28,7 +28,7 @@ function getAllBooks(title) {
                             <h6 class="book-subtitle" id="subtitle${i}"></h6>
                             <h7 class="author" id="author${i}"></h7>
                             <p class="card-text book-description" id="description${i}"></p>
-                            <a class="btn btn-primary" href="/api/book/${googleId}">See More Info</a>
+                            <a class="btn btn-primary" href="/bookPage/${googleId}">See More Info</a>
                             <button class="btn btn-primary put-in-shelf" data-googleId=${googleId}>Add To My Bookshelf</button>
                         </div>
                     </div>`;

@@ -1,5 +1,5 @@
-singleBook();
-
+console.log(this);
+singleBook(window.location.href.split("/").pop());
 function singleBook(googleId) {
   const queryURL = `https://www.googleapis.com/books/v1/volumes/${googleId}`;
 
@@ -17,7 +17,6 @@ function singleBook(googleId) {
               <h2>${res.volumeInfo.title}</h2>
               <h4>${res.volumeInfo.authors[0]}</h4>
               <p>Description:</p>
-              <br>
               <p>${res.volumeInfo.description}</p>
               <p>Average Rating: ${res.volumeInfo.averageRating}</p>
               <p>Published Date: ${res.volumeInfo.publishedDate}</p>
@@ -30,3 +29,5 @@ function singleBook(googleId) {
     $("#displayBookPage").append(html);
   });
 }
+
+module.exports = singleBook;
