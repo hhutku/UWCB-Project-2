@@ -21,6 +21,9 @@ We started out dividing up all the roles among the 5 members of our team, but qu
 - Working like buttons
 - More polished look
 
+## Technologies
+CSS,JQuery,Javascript,Bootstrap,Sequelize,Express,Node.js,Handlebars
+
 ## Links
 
 [Github Repo](https://github.com/ToMakPo/UWCB-Project-2)
