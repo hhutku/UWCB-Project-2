@@ -10,7 +10,10 @@ Its future dev plans evolved into a place where you can connect with others who 
 ## Process
 We started out dividing up all the roles among the 5 members of our team, but quickly the lines became blurry and everyone was working on everything, and there was a lot of colaboration.
 
-## Demo
+## Images of APP
+
+![image of app](./public/img/b1.jpg)
+![image of app](./public/img/b2.jpg)
 
 ## Future Development
 - Groups
